@@ -1,3 +1,3 @@
 jQuery(function($) {
-    alert("let's gooo!");
+    alert("Welcome!");
 });

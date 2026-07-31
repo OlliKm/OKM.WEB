@@ -313,4 +313,58 @@ document.addEventListener("DOMContentLoaded", () => {
       resultsContainer.style.display = "block";
     });
   }
+  document.addEventListener('DOMContentLoaded', () => {
+  /* =========================================================
+     6. Web3Forms Contact Form Handler
+     ========================================================= */
+  const contactForm = document.getElementById('contact-form');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      // Prevent the default form submission behavior
+      e.preventDefault();
+      
+      const submitBtn = contactForm.querySelector('.bento-submit-btn');
+      const originalText = submitBtn.textContent;
+      
+      // Visual feedback while sending
+      submitBtn.textContent = 'SENDING...';
+
+      // Gather form data
+      const formData = new FormData(contactForm);
+      const object = Object.fromEntries(formData);
+      const json = JSON.stringify(object);
+
+      // Send data to Web3Forms
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: json
+      })
+      .then(async (response) => {
+        let jsonResponse = await response.json();
+        if (response.status === 200) {
+          // Success message
+          alert('Message sent successfully!');
+          contactForm.reset();
+        } else {
+          // API error
+          alert(jsonResponse.message || 'Something went wrong.');
+        }
+      })
+      .catch(error => {
+        // Network or fetch error
+        console.error('Web3Forms Error:', error);
+        alert('Something went wrong! Please try again later.');
+      })
+      .finally(() => {
+        // Restore button text
+        submitBtn.textContent = originalText;
+      });
+    });
+  }
+});
 });

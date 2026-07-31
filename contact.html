@@ -57,28 +57,36 @@
           </div>
         </div>
 
-        <!-- Right: Contact Form Card -->
-        <div class="contact-form-bento-card">
-          <form class="bento-contact-form" id="contact-form">
-            <div class="bento-form-group">
-              <label for="name">NAME</label>
-              <input type="text" id="name" placeholder="Your Name" required>
-            </div>
-            <div class="bento-form-group">
-              <label for="email">EMAIL</label>
-              <input type="email" id="email" placeholder="your@email.com" required>
-            </div>
-            <div class="bento-form-group">
-              <label for="subject">SUBJECT</label>
-              <input type="text" id="subject" placeholder="Project Inquiry / Collaboration">
-            </div>
-            <div class="bento-form-group">
-              <label for="message">MESSAGE</label>
-              <textarea id="message" rows="4" placeholder="Tell me about your project..." required></textarea>
-            </div>
-            <button type="submit" class="bento-submit-btn">SEND MESSAGE →</button>
-          </form>
-        </div>
+       <!-- Right: Contact Form Card -->
+<div class="contact-form-bento-card">
+  <form class="bento-contact-form" id="contact-form">
+    
+    <!-- Web3Forms Access Key -->
+    <input type="hidden" name="access_key" value="118d1ccd-d01d-4318-9b8b-5a63d50ef987">
+
+    <div class="bento-form-group">
+      <label for="name">NAME</label>
+      <input type="text" name="name" id="name" placeholder="Your Name" required>
+    </div>
+    
+    <div class="bento-form-group">
+      <label for="email">EMAIL</label>
+      <input type="email" name="email" id="email" placeholder="your@email.com" required>
+    </div>
+    
+    <div class="bento-form-group">
+      <label for="subject">SUBJECT</label>
+      <input type="text" name="subject" id="subject" placeholder="Project Inquiry / Collaboration">
+    </div>
+    
+    <div class="bento-form-group">
+      <label for="message">MESSAGE</label>
+      <textarea name="message" id="message" rows="4" placeholder="Tell me about your project..." required></textarea>
+    </div>
+    
+    <button type="submit" class="bento-submit-btn">SEND MESSAGE →</button>
+  </form>
+</div>
 
       </section>
 

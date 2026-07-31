@@ -2432,3 +2432,126 @@ body.about-style-body {
   background-color: #ffffff;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 }
+/* =========================================================
+   Mini-Page Card Layout Styling
+   ========================================================= */
+.soft-card {
+  background: #FAF8F5;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid #EAE5DF;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.soft-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* Mini Window Browser Header inside the Card */
+.soft-card__mini-browser {
+  background: #EFECE6;
+  padding: 10px 12px;
+  border-bottom: 1px solid #E2DCD4;
+}
+
+.mini-browser__header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.mini-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+.mini-dot.red { background: #FF5F56; }
+.mini-dot.yellow { background: #FFBD2E; }
+.mini-dot.green { background: #27C93F; }
+
+.mini-browser__title-bar {
+  font-family: monospace;
+  font-size: 10px;
+  color: #777;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 140px;
+}
+
+/* Card Image Container */
+.soft-card__image {
+  width: 100%;
+  aspect-ratio: 16/10;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.soft-card__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.soft-card:hover .soft-card__image img {
+  transform: scale(1.03);
+}
+
+/* Card Body & Typography */
+.soft-card__body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.soft-card__title {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.15;
+  color: #1D1D1F;
+  margin-bottom: 8px;
+}
+
+.soft-card__desc {
+  font-size: 13px;
+  color: #6E6E73;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  flex: 1;
+}
+
+.soft-card__footer-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #EAE5DF;
+  padding-top: 12px;
+  margin-top: auto;
+}
+
+.soft-card__meta {
+  font-size: 10px;
+  color: #86868B;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.mini-read-pill {
+  font-size: 11px;
+  font-weight: 600;
+  color: #8C3B2B;
+}

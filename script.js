@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================================
-     2. Pagination State & Helpers (Declared First)
+     2. Pagination State & Helpers
      ========================================================= */
   let currentPage = 1;
   const postsPerPage = 6;
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================================
-     3. Dynamic Blog Data & Search Engine (Auto-Sorted Newest First)
+     3. Dynamic Blog Data & Search Engine
      ========================================================= */
   let dynamicBlogDatabase = [];
   
@@ -82,12 +82,10 @@ document.addEventListener('DOMContentLoaded', () => {
   const noResultsMsg = document.getElementById('no-results-msg');
 
   function renderPosts(searchQuery = "") {
-    if (!featuredContainer || !gridContainer) return;
+    if (!gridContainer) return;
 
-    // 1. Sort posts by date descending (newest first)
     dynamicBlogDatabase.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    // 2. Filter posts based on user search query
     const filteredPosts = dynamicBlogDatabase.filter(post => 
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -98,31 +96,32 @@ document.addEventListener('DOMContentLoaded', () => {
       noResultsMsg.style.display = (filteredPosts.length === 0) ? 'block' : 'none';
     }
 
-    // Setup pagination count based on filtered elements
     setupPagination(filteredPosts.length);
 
-    // 3. Slice posts for current pagination page
     const startIndex = (currentPage - 1) * postsPerPage;
     const paginatedPosts = filteredPosts.slice(startIndex, startIndex + postsPerPage);
 
-    // 4. Hide the large Bento Hero container entirely so all posts display uniformly in the grid
     if (featuredContainer) {
       featuredContainer.style.display = "none";
       featuredContainer.innerHTML = "";
     }
 
-    // 5. Render ALL posts evenly into the grid cards
-    const gridPosts = paginatedPosts;
-
-    // Save existing warning messages if they exist so we don't overwrite them
     const existingWarnings = gridContainer.querySelectorAll('.diagnostic-message');
     let warningsHTML = '';
     existingWarnings.forEach(w => warningsHTML += w.outerHTML);
 
-    gridContainer.innerHTML = warningsHTML + gridPosts.map(post => `
+    gridContainer.innerHTML = warningsHTML + paginatedPosts.map(post => `
       <article class="soft-card clickable-post" data-content="${encodeURIComponent(post.content)}">
-        <div class="soft-card__image">
-          <img src="${post.img}" alt="${post.title}">
+        <div class="soft-card__mini-browser">
+          <div class="mini-browser__header">
+            <span class="mini-dot red"></span>
+            <span class="mini-dot yellow"></span>
+            <span class="mini-dot green"></span>
+            <span class="mini-browser__title-bar">${post.title}</span>
+          </div>
+          <div class="soft-card__image">
+            <img src="${post.img}" alt="${post.title}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop';">
+          </div>
         </div>
         <div class="soft-card__body">
           <span class="pill-badge pill-badge--sm">
@@ -131,7 +130,10 @@ document.addEventListener('DOMContentLoaded', () => {
           </span>
           <h3 class="soft-card__title">${post.title}</h3>
           <p class="soft-card__desc">${post.excerpt || post.content.substring(0, 80) + '...'}</p>
-          <p class="soft-card__meta">${post.meta}</p>
+          <div class="soft-card__footer-meta">
+            <span class="soft-card__meta">${post.meta}</span>
+            <span class="mini-read-pill">Read Article →</span>
+          </div>
         </div>
       </article>
     `).join('');
@@ -141,82 +143,99 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
-      currentPage = 1; // Reset to page 1 on search
+      currentPage = 1;
       renderPosts(e.target.value.trim());
     });
   }
 
-  // Render initial posts instantly
-  renderPosts();
-
   /* =========================================================
-     4. Fetch CMS Markdown Posts from GitHub (WITH DIAGNOSTICS)
+     4. Fetch CMS Markdown Posts & Parse Frontmatter Fields
      ========================================================= */
   async function loadCMSBlogPosts() {
     const repo = 'OlliKm/OKM.WEB'; 
-    const folder = 'content/blog';
+    const branch = 'main';
+
+    // All 3 markdown files present in content/blog/
+    const postFiles = [
+      'djio-smo-pocket-4p.md',
+      'macbook-m2-pro-worth-it.md',
+      'test-post-see-if-it-works.md' // Update if your 3rd filename differs slightly
+    ];
 
     try {
-      const response = await fetch(`https://api.github.com/repos/${repo}/contents/${folder}`);
-      
-      if (!response.ok) {
-        let errorReason = `Status ${response.status}: ${response.statusText}.`;
-        if (response.status === 404) {
-           errorReason += " (Make sure your GitHub repository is set to PUBLIC, not Private, and the folder path is exactly correct.)";
-        } else if (response.status === 403) {
-           errorReason += " (GitHub API rate limit reached. Try again in an hour.)";
-        }
+      dynamicBlogDatabase = []; 
+
+      for (const fileName of postFiles) {
+        const rawSlug = fileName.replace('.md', '');
+        const downloadUrl = `https://raw.githubusercontent.com/${repo}/${branch}/content/blog/${fileName}`;
         
-        if (gridContainer) {
-          gridContainer.insertAdjacentHTML('afterbegin', `
-            <div class="diagnostic-message" style="grid-column: 1 / -1; padding: 1.5rem; background: #ffebee; color: #c62828; border-radius: 8px; border: 1px solid #ef9a9a; margin-bottom: 2rem;">
-              <strong>⚠️ GitHub Fetch Error:</strong> ${errorReason}
-            </div>
-          `);
-        }
-        return;
-      }
+        let title = rawSlug.replace(/-/g, ' ');
+        title = title.charAt(0).toUpperCase() + title.slice(1);
+        let category = "Insights";
+        let dateStr = "2026-08-15";
+        let fileContent = "";
+        let extractedImg = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop';
+        
+        try {
+          const mdResponse = await fetch(downloadUrl);
+          if (mdResponse.ok) {
+            const rawText = await mdResponse.text();
 
-      const files = await response.json();
+            // Safely parse frontmatter and body content
+            const parts = rawText.split('---');
+            if (parts.length >= 3) {
+              const frontmatter = parts[1];
+              fileContent = parts.slice(2).join('---').trim();
+              
+              const titleMatch = frontmatter.match(/title:\s*(['"]?)(.*?)\1/m);
+              const categoryMatch = frontmatter.match(/category:\s*(['"]?)(.*?)\1/m);
+              const dateMatch = frontmatter.match(/date:\s*(['"]?)(.*?)\1/m);
+              const imgMatch = frontmatter.match(/(?:image|featuredImage|img|cover|thumbnail):\s*(['"]?)(.*?)\1/m);
 
-      if (!Array.isArray(files)) return;
-
-      for (const file of files) {
-        if (file.name.endsWith('.md')) {
-          const rawTitle = file.name.replace('.md', '').replace(/-/g, ' ');
-          const title = rawTitle.charAt(0).toUpperCase() + rawTitle.slice(1);
-          
-          let fileContent = `Loading content for ${title}...`;
-          
-          try {
-            const mdResponse = await fetch(file.download_url);
-            if (mdResponse.ok) {
-              fileContent = await mdResponse.text();
+              if (titleMatch && titleMatch[2]) title = titleMatch[2].trim();
+              if (categoryMatch && categoryMatch[2]) category = categoryMatch[2].trim();
+              if (dateMatch && dateMatch[2]) dateStr = dateMatch[2].trim();
+              
+              if (imgMatch && imgMatch[2]) {
+                let foundPath = imgMatch[2].trim();
+                if (foundPath && foundPath !== 'N-A' && foundPath !== 'N/A') {
+                  foundPath = foundPath.replace(/^\[\[/, '').replace(/\]\]$/, '');
+                  if (foundPath.startsWith('http')) {
+                    extractedImg = foundPath;
+                  } else {
+                    const cleanPath = foundPath.replace(/^\.?\//, '');
+                    extractedImg = `https://raw.githubusercontent.com/${repo}/${branch}/${cleanPath}`;
+                  }
+                }
+              }
+            } else {
+              fileContent = rawText;
             }
-          } catch (contentError) {
-            console.error(`Failed to load content for ${file.name}`, contentError);
           }
-
-          dynamicBlogDatabase.push({
-            id: file.sha,
-            date: "2026-08-15",
-            title: title,
-            category: "CMS Post",
-            meta: "LIVE CMS DATA",
-            img: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=600&q=80",
-            excerpt: "Read more about this topic...",
-            content: fileContent
-          });
+        } catch (contentError) {
+          console.error(`Failed to parse content for ${fileName}`, contentError);
         }
+
+        dynamicBlogDatabase.push({
+          id: rawSlug,
+          date: dateStr,
+          title: title,
+          category: category,
+          meta: dateStr.toUpperCase() + " • LIVE POST",
+          img: extractedImg,
+          excerpt: fileContent ? fileContent.substring(0, 80) + '...' : "Read more about this topic...",
+          content: fileContent
+        });
       }
 
       renderPosts(searchInput ? searchInput.value.trim() : "");
 
     } catch (error) {
+       console.error("CMS Loading Error:", error);
        if (gridContainer) {
           gridContainer.insertAdjacentHTML('afterbegin', `
             <div class="diagnostic-message" style="grid-column: 1 / -1; padding: 1.5rem; background: #ffebee; color: #c62828; border-radius: 8px; border: 1px solid #ef9a9a; margin-bottom: 2rem;">
-              <strong>⚠️ Network Error:</strong> Could not connect to GitHub at all.
+              <strong>⚠️ Notice:</strong> Could not load posts from repository.
             </div>
           `);
         }
@@ -306,8 +325,8 @@ document.addEventListener('DOMContentLoaded', () => {
       e.preventDefault();
       
       const submitBtn = contactForm.querySelector('.bento-submit-btn');
-      const originalText = submitBtn.textContent;
-      submitBtn.textContent = 'SENDING...';
+      const originalText = submitBtn ? submitBtn.textContent : 'SEND';
+      if (submitBtn) submitBtn.textContent = 'SENDING...';
 
       const formData = new FormData(contactForm);
       const object = Object.fromEntries(formData);
@@ -335,7 +354,7 @@ document.addEventListener('DOMContentLoaded', () => {
         alert('Something went wrong! Please try again later.');
       })
       .finally(() => {
-        submitBtn.textContent = originalText;
+        if (submitBtn) submitBtn.textContent = originalText;
       });
     });
   }

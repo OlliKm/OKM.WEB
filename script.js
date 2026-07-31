@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
      ========================================================= */
   async function loadCMSBlogPosts() {
     const repo = 'OlliKm/OKM.WEB'; 
-    const folder = 'blog-posts';
+    const folder = 'content/blog';
 
     try {
       // Fetch the directory contents from GitHub

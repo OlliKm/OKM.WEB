@@ -40,125 +40,28 @@
         </div>
       </section>
 
-      <!-- FEATURED POST BENTO -->
-      <section class="bento-hero">
-        <article class="bento-hero__main clickable-post" data-content="Building a minimalist rig for the Sony A6700 requires balancing weight, functionality, and speed. In this article, we break down the top cages, top handles, and lightweight audio options for run-and-gun filmmaking.">
-          <div class="bento-hero__img-wrapper">
-            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=80" alt="Sony camera rig">
-            <div class="bento-hero__overlay">
-              <span class="pill-badge">
-                <span class="pill-badge__dot"></span>
-                Tech & Gear
-              </span>
-              <h2 class="bento-hero__title">Building the Ultimate Minimalist Sony A6700 Rig</h2>
-              <p class="bento-hero__meta">AUG 10 • 10 MIN READ</p>
-            </div>
-          </div>
-        </article>
-
-        <!-- Sidebar: Search, Search Results & Latest Posts -->
-        <aside class="bento-hero__sidebar">
-          
-          <!-- Search Bar -->
-          <div class="search-container">
-            <input 
-              type="text" 
-              id="blog-search-input" 
-              placeholder="Search posts..." 
-              aria-label="Search blog posts"
-              autocomplete="off"
-            />
-          </div>
-
-          <!-- Dynamic Search Results Dropdown/List (Hidden by default) -->
-          <div id="search-results-container" class="search-results-list" style="display: none;">
-            <div id="search-results-content"></div>
-          </div>
-
-          <h2 class="sidebar-heading">Latest Posts</h2>
-
-          <div class="sidebar-list">
-            <a href="#" class="sidebar-item clickable-post" data-content="A clean desk layout is more than just aesthetics. Reducing physical clutter directly correlates with reducing mental overhead when starting deep creative work blocks.">
-              <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=200&q=80" alt="Workspace desk setup">
-              <div class="sidebar-item__text">
-                <h3>Designing a Distraction-Free Workspace for Deep Work</h3>
-                <p>AUG 10 • 4 MIN READ</p>
-              </div>
-            </a>
-
-            <a href="#" class="sidebar-item clickable-post" data-content="Color grading in DaVinci Resolve doesn't have to be overwhelming. Here is my 4-node tree template for achieving filmic skin tones and organic warmth every time.">
-              <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=200&q=80" alt="Editing timeline">
-              <div class="sidebar-item__text">
-                <h3>My DaVinci Resolve Color Grading Process</h3>
-                <p>AUG 10 • 8 MIN READ</p>
-              </div>
-            </a>
-
-            <a href="#" class="sidebar-item clickable-post" data-content="Compact pocket cameras are revolutionizing everyday vlogging and travel video creation. We look at image stabilization and audio performance under field conditions.">
-              <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=200&q=80" alt="Osmo Pocket camera">
-              <div class="sidebar-item__text">
-                <h3>Why the Pocket Camera Revolution is Here to Stay</h3>
-                <p>AUG 10 • 5 MIN READ</p>
-              </div>
-            </a>
-          </div>
-        </aside>
+      <!-- FEATURED POST BENTO (Dynamically Injected) -->
+      <section class="bento-hero" id="featured-hero-container">
+        <!-- Dynamic Hero Post will load here -->
       </section>
 
       <hr class="section-divider">
 
-      <!-- GRID SECTION -->
+      <!-- GRID SECTION WITH SEARCH BAR -->
       <section class="cards-section">
-        <div class="cards-section__header">
+        <div class="cards-section__header" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
           <h2 class="serif-section-title" style="margin-bottom: 0;">Founders Corner</h2>
+          <!-- ADDED SEARCH BAR -->
+          <input type="text" id="blog-search-input" placeholder="Search articles..." style="padding: 0.5rem 1rem; border: 1px solid #ccc; border-radius: 4px; font-family: 'Inter', sans-serif; width: 100%; max-width: 300px;">
         </div>
 
-        <div class="three-card-grid">
-          <article class="soft-card clickable-post" data-content="Creating a seamless workflow means eliminating friction between ideas and execution. We share insights into building reliable digital architectures for creators.">
-            <div class="soft-card__image">
-              <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80" alt="Workspace desk setup">
-            </div>
-            <div class="soft-card__body">
-              <span class="pill-badge pill-badge--sm">
-                <span class="pill-badge__dot"></span>
-                Workflow
-              </span>
-              <h3 class="soft-card__title">Our people make the difference</h3>
-              <p class="soft-card__desc">We're an extension of your creative workflow, helping you build distraction-free environments.</p>
-              <p class="soft-card__meta">AUG 10 • 10 MIN READ</p>
-            </div>
-          </article>
-
-          <article class="soft-card clickable-post" data-content="How we achieve rich, organic color palettes without spending hours tweaking individual hue curves in post-production.">
-            <div class="soft-card__image">
-              <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600&q=80" alt="Video editing">
-            </div>
-            <div class="soft-card__body">
-              <span class="pill-badge pill-badge--sm">
-                <span class="pill-badge__dot"></span>
-                Video Editing
-              </span>
-              <h3 class="soft-card__title">Color Grading Like a Pro</h3>
-              <p class="soft-card__desc">Transforming raw log footage into filmic, warm organic tones with minimal effort.</p>
-              <p class="soft-card__meta">AUG 10 • 10 MIN READ</p>
-            </div>
-          </article>
-
-          <article class="soft-card clickable-post" data-content="A detailed look at why lightweight gimbal setups are taking over traditional shoulder rigs for solo shooters on fast-moving sets.">
-            <div class="soft-card__image">
-              <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Compact camera">
-            </div>
-            <div class="soft-card__body">
-              <span class="pill-badge pill-badge--sm">
-                <span class="pill-badge__dot"></span>
-                Tech & Gear
-              </span>
-              <h3 class="soft-card__title">Minimalist Travel Rigs</h3>
-              <p class="soft-card__desc">Why compact gimbal setups and travel rigs are replacing traditional mirrorless setups.</p>
-              <p class="soft-card__meta">AUG 10 • 10 MIN READ</p>
-            </div>
-          </article>
+        <!-- Three Card Grid (Dynamically Injected) -->
+        <div class="three-card-grid" id="dynamic-blog-grid">
+          <!-- Dynamic cards will load here -->
         </div>
+        
+        <!-- No results message (Hidden by default) -->
+        <p id="no-results-msg" style="display: none; text-align: center; color: #666; margin-top: 2rem;">No posts found matching your search.</p>
       </section>
 
       <!-- PAGINATION -->
@@ -166,16 +69,12 @@
         <button class="page-arrow" id="page-prev">←</button>
         <div class="page-numbers" id="page-numbers">
           <span class="page-num active" data-page="1">1</span>
-          <span class="page-num" data-page="2">2</span>
-          <span class="page-num" data-page="3">3</span>
         </div>
         <button class="page-arrow" id="page-next">→</button>
       </div>
 
     </main>
   </div>
-
-  <div id="blog-posts-container">Loading posts...</div>
 
   <!-- ARTICLE MODAL READER -->
   <div class="article-modal" id="article-modal" aria-hidden="true">

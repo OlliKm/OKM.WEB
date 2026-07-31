@@ -6,7 +6,10 @@ export async function onRequest(context) {
     const url = new URL(request.url);
     const redirectUrl = new URL('https://github.com/login/oauth/authorize');
     redirectUrl.searchParams.set('client_id', client_id);
+    
+    // Ensure this targets the new api/callback path
     redirectUrl.searchParams.set('redirect_uri', url.origin + '/api/callback');
+    
     redirectUrl.searchParams.set('scope', 'repo user');
     redirectUrl.searchParams.set(
       'state',

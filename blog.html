@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog — Olli Km</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAV HEADER -->
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Olli Km home">
+        <span class="logo-text">OLLI KM</span>
+      </a>
+
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle Navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav__links" id="nav-links">
+        <a href="about.html">About</a>
+        <a href="blog.html" class="nav__link--active">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a class="nav__social" href="https://www.youtube.com/@OlliKm" target="_blank" rel="noopener">Youtube</a>
+    </div>
+  </header>
+
+  <!-- BLOG HERO -->
+  <section class="blog-hero">
+    <div class="blog-hero__inner">
+      <span class="mono-tag">ESSAYS , GUIDES &amp; TECH THOUGHTS</span>
+      <h1 class="blog-hero__title">Writing &amp; Notes</h1>
+      
+      <!-- Category Filter Pills -->
+      <div class="blog-filters">
+        <button class="filter-pill active" data-filter="all">All Posts</button>
+        <button class="filter-pill" data-filter="tech">Tech &amp; Gear</button>
+        <button class="filter-pill" data-filter="workflow">Workflows</button>
+        <button class="filter-pill" data-filter="video">Video Editing</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURED POST -->
+  <section class="blog-featured">
+    <div class="blog-featured__inner">
+      <a href="#" class="featured-card">
+        <div class="featured-card__image">
+          <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=80" alt="Sony camera rig">
+          <span class="category-badge">TECH &amp; GEAR</span>
+        </div>
+        <div class="featured-card__content">
+          <div class="post-meta">
+            <span>JULY 28, 2026</span>
+            <span class="dot">•</span>
+            <span>6 MIN READ</span>
+          </div>
+          <h2 class="featured-card__title">Building the Ultimate Minimalist Sony A6700 Rig</h2>
+          <p class="featured-card__excerpt">
+            An in-depth breakdown of how I configured my main camera setup for solo run-and-gun filmmaking, compact lens selections, and audio routing.
+          </p>
+          <span class="read-more-link">Read Article →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- BLOG POSTS GRID -->
+  <section class="blog-grid-section">
+    <div class="blog-grid__inner">
+      <div class="posts-grid">
+        
+        <!-- Post Item 1 -->
+        <article class="post-card" data-category="workflow">
+          <a href="#" class="post-card__link">
+            <div class="post-card__image">
+              <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" alt="Workspace desk setup">
+              <span class="category-badge">WORKFLOW</span>
+            </div>
+            <div class="post-card__body">
+              <div class="post-meta">
+                <span>JULY 14, 2026</span>
+                <span class="dot">•</span>
+                <span>4 MIN READ</span>
+              </div>
+              <h3 class="post-card__title">Designing a Distraction-Free Workspace for Deep Work</h3>
+              <p class="post-card__excerpt">
+                How cable management, monitor placement, and lighting transform daily productivity for creators.
+              </p>
+            </div>
+          </a>
+        </article>
+
+        <!-- Post Item 2 -->
+        <article class="post-card" data-category="video">
+          <a href="#" class="post-card__link">
+            <div class="post-card__image">
+              <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80" alt="Video editing timeline">
+              <span class="category-badge">VIDEO EDITING</span>
+            </div>
+            <div class="post-card__body">
+              <div class="post-meta">
+                <span>JUNE 30, 2026</span>
+                <span class="dot">•</span>
+                <span>8 MIN READ</span>
+              </div>
+              <h3 class="post-card__title">My DaVinci Resolve Color Grading Process</h3>
+              <p class="post-card__excerpt">
+                Step-by-step color science walkthrough for converting Sony S-Log3 into filmic, warm organic tones.
+              </p>
+            </div>
+          </a>
+        </article>
+
+        <!-- Post Item 3 -->
+        <article class="post-card" data-category="tech">
+          <a href="#" class="post-card__link">
+            <div class="post-card__image">
+              <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=800&q=80" alt="DJI Osmo Pocket camera">
+              <span class="category-badge">TECH &amp; GEAR</span>
+            </div>
+            <div class="post-card__body">
+              <div class="post-meta">
+                <span>JUNE 12, 2026</span>
+                <span class="dot">•</span>
+                <span>5 MIN READ</span>
+              </div>
+              <h3 class="post-card__title">Why the Pocket Camera Revolution is Here to Stay</h3>
+              <p class="post-card__excerpt">
+                Why small sensor gimbals and compact creators rigs are replacing heavy mirrorless cameras on travel shoots.
+              </p>
+            </div>
+          </a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIVERSAL FOOTER -->
+  <footer class="site-footer">
+    <div class="footer__wave-banner"></div>
+
+    <div class="footer__content">
+      <div class="footer__grid">
+        
+        <!-- Left: Branding & Newsletter -->
+        <div class="footer__brand-col">
+          <div class="footer__logo">OLLI KM<span class="logo-sup">®</span></div>
+          <p class="footer__newsletter-label">SUBSCRIBE FOR OUR NEWSLETTER</p>
+          <form class="footer__form" id="newsletter-form">
+            <input type="email" placeholder="Email" required aria-label="Email address">
+            <button type="submit" aria-label="Subscribe">→</button>
+          </form>
+          <p class="footer__disclaimer">Your information is never disclosed to third parties.</p>
+        </div>
+
+        <!-- Right: 3-Column Navigation -->
+        <nav class="footer__nav-grid">
+          <div class="footer__col">
+            <span class="footer__col-head">MAIN PAGES</span>
+            <a href="index.html">Homepage</a>
+            <a href="about.html">About</a>
+          </div>
+          <div class="footer__col">
+            <span class="footer__col-head">COMPANY</span>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Tech</a>
+          </div>
+          <div class="footer__col">
+            <span class="footer__col-head">CONTACT &amp; OTHER</span>
+            <a href="contact.html">Contact</a>
+          </div>
+        </nav>
+
+      </div>
+
+      <!-- Edge-to-Edge Watermark -->
+      <div class="footer__watermark-bottom">OLLI KM</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

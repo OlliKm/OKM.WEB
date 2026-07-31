@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Olli Km</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- NAV HEADER -->
+  <header class="nav">
+    <div class="nav__inner">
+      <a href="index.html" class="nav__logo" aria-label="Olli Km home">
+        <span class="logo-text">OLLI KM</span>
+      </a>
+
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle Navigation">
+        <span></span><span></span><span></span>
+      </button>
+
+      <nav class="nav__links" id="nav-links">
+        <a href="about.html" class="nav__link--active">About</a>
+        <a href="blog.html">Blog</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+
+      <a class="nav__social" href="https://www.youtube.com/@OlliKm" target="_blank" rel="noopener">Youtube</a>
+    </div>
+  </header>
+
+  <!-- PAGE HERO -->
+  <section class="about-hero">
+    <div class="about-hero__inner">
+      <span class="mono-tag">BASED IN UK — YOUTUBE CREATOR</span>
+      <h1 class="about-hero__title">
+        Tech enthusiast &amp; Storyteller.
+      </h1>
+    </div>
+  </section>
+
+  <!-- BIO GRID SECTION -->
+  <section class="about-bio">
+    <div class="about-bio__inner">
+      <div class="about-bio__image-col">
+        <div class="bio-image-wrapper">
+          <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1000&q=80" alt="Olli Km portrait">
+          <div class="glass-badge">
+            FRANCO REFLECTS A COMMITMENT TO INNOVATION AND THOUGHTFUL DESIGN
+          </div>
+        </div>
+      </div>
+
+      <div class="about-bio__text-col">
+        <span class="mono-label">THE STORY</span>
+        <h2 class="section-heading">Behind the Lens</h2>
+        <p class="bio-paragraph">
+          Hey, I'm Olli. I create videos centered around minimalist tech, everyday Carry setups, cinematic vlogs, and creative workflows. My work blends functional design with cinematic storytelling to help creators find clarity in their creative setup.
+        </p>
+        <p class="bio-paragraph">
+          Whether reviewing compact camera rigs like the Sony A6700 or designing personal workspace setups, the goal is always the same: keep things simple, intentional, and useful.
+        </p>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+          <div class="stat-card">
+            <span class="stat-card__number">100K+</span>
+            <span class="stat-card__label">YouTube Community</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__number">4K</span>
+            <span class="stat-card__label">Cinematic Standard</span>
+          </div>
+          <div class="stat-card">
+            <span class="stat-card__number">5+ Yrs</span>
+            <span class="stat-card__label">Digital Storytelling</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CREATIVE PHILOSOPHY SECTION -->
+  <section class="about-values">
+    <div class="about-values__inner">
+      <div class="values-header">
+        <span class="mono-label">PHILOSOPHY</span>
+        <h2 class="section-heading">What Drives My Content</h2>
+      </div>
+
+      <div class="values-grid">
+        <div class="value-card">
+          <span class="value-card__num">01</span>
+          <h3 class="value-card__title">Thoughtful Gear</h3>
+          <p class="value-card__desc">
+            Focusing on tools that elevate creativity rather than cluttering your setup. Quality over quantity in every piece of tech.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <span class="value-card__num">02</span>
+          <h3 class="value-card__title">Cinematic Realism</h3>
+          <p class="value-card__desc">
+            Bringing cinematic color science, deliberate framing, and immersive sound design to daily vlogs and tech reviews.
+          </p>
+        </div>
+
+        <div class="value-card">
+          <span class="value-card__num">03</span>
+          <h3 class="value-card__title">Intentional Living</h3>
+          <p class="value-card__desc">
+            Designing spaces, daily routines, and digital workflows that foster deep work and creative independence.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- UNIVERSAL FOOTER -->
+  <footer class="site-footer">
+    <div class="footer__wave-banner"></div>
+
+    <div class="footer__content">
+      <div class="footer__grid">
+        
+        <!-- Left: Branding & Newsletter -->
+        <div class="footer__brand-col">
+          <div class="footer__logo">OLLI KM<span class="logo-sup">®</span></div>
+          <p class="footer__newsletter-label">SUBSCRIBE FOR OUR NEWSLETTER</p>
+          <form class="footer__form" id="newsletter-form">
+            <input type="email" placeholder="Email" required aria-label="Email address">
+            <button type="submit" aria-label="Subscribe">→</button>
+          </form>
+          <p class="footer__disclaimer">Your information is never disclosed to third parties.</p>
+        </div>
+
+        <!-- Right: 3-Column Navigation -->
+        <nav class="footer__nav-grid">
+          <div class="footer__col">
+            <span class="footer__col-head">MAIN PAGES</span>
+            <a href="index.html">Homepage</a>
+            <a href="about.html">About</a>
+          </div>
+          <div class="footer__col">
+            <span class="footer__col-head">COMPANY</span>
+            <a href="blog.html">Blog</a>
+            <a href="contact.html">Tech</a>
+          </div>
+          <div class="footer__col">
+            <span class="footer__col-head">CONTACT &amp; OTHER</span>
+            <a href="contact.html">Contact</a>
+          </div>
+        </nav>
+
+      </div>
+
+      <!-- Edge-to-Edge Watermark -->
+      <div class="footer__watermark-bottom">OLLI KM</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -367,4 +367,52 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
+async function loadCMSBlogPosts() {
+  const container = document.getElementById('blog-posts-container');
+  if (!container) return;
+
+  const repo = 'OlliKm/OKM.WEB'; 
+  const folder = 'blog-posts';
+
+  try {
+    const response = await fetch(`https://api.github.com/repos/${repo}/contents/${folder}`);
+    const files = await response.json();
+
+    if (!Array.isArray(files) || files.length === 0) {
+      container.innerHTML = '<p>No custom posts published yet.</p>';
+      return;
+    }
+
+    container.innerHTML = '<h2>Published CMS Posts</h2>';
+    const postList = document.createElement('div');
+    postList.className = 'three-card-grid';
+
+    files.forEach(file => {
+      if (file.name.endsWith('.md')) {
+        const rawTitle = file.name.replace('.md', '').replace(/-/g, ' ');
+        const title = rawTitle.charAt(0).toUpperCase() + rawTitle.slice(1);
+
+        const card = document.createElement('article');
+        card.className = 'soft-card clickable-post';
+        card.setAttribute('data-content', `Content from CMS post: ${title}`);
+        card.innerHTML = `
+          <div class="soft-card__body">
+            <span class="pill-badge pill-badge--sm"><span class="pill-badge__dot"></span>CMS Post</span>
+            <h3 class="soft-card__title">${title}</h3>
+            <p class="soft-card__desc">Click to view post details.</p>
+            <p class="soft-card__meta">PUBLISHED VIA CMS</p>
+          </div>
+        `;
+        postList.appendChild(card);
+      }
+    });
+
+    container.appendChild(postList);
+  } catch (error) {
+    console.error('Error fetching CMS posts:', error);
+    container.innerHTML = '<p>Could not load live CMS posts at this time.</p>';
+  }
+}
+
+document.addEventListener('DOMContentLoaded', loadCMSBlogPosts);
 });

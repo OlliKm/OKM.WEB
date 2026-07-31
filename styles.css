@@ -2370,3 +2370,24 @@ body.about-style-body {
   }
 }
 }
+@media (max-width: 768px) {
+  /* Fix pagination buttons layout on mobile for easy tapping */
+  .app-pagination {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    gap: 10px;
+  }
+  
+  .page-arrow {
+    padding: 10px 16px;
+    background: #F6F3EF;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+
+  .three-card-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

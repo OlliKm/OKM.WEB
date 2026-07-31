@@ -27,43 +27,66 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================================
-     2. Dynamic Blog Data & Search Engine
+     2. Pagination State & Helpers (Declared First)
      ========================================================= */
-  
-  // Base database with fallback posts so the page is never empty
+  let currentPage = 1;
+  const postsPerPage = 6;
+
+  function setupPagination(totalPosts) {
+    const pageNumbersContainer = document.getElementById('page-numbers');
+    if (!pageNumbersContainer) return;
+
+    const totalPages = Math.ceil(totalPosts / postsPerPage) || 1;
+    let pagesHTML = '';
+
+    for (let i = 1; i <= totalPages; i++) {
+      pagesHTML += `<span class="page-num ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</span>`;
+    }
+    pageNumbersContainer.innerHTML = pagesHTML;
+
+    document.querySelectorAll('.page-num').forEach(numBtn => {
+      numBtn.addEventListener('click', (e) => {
+        currentPage = parseInt(e.target.getAttribute('data-page'));
+        renderPosts(searchInput ? searchInput.value.trim() : "");
+      });
+    });
+  }
+
+  const prevBtn = document.getElementById('page-prev');
+  const nextBtn = document.getElementById('page-next');
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      if (currentPage > 1) {
+        currentPage--;
+        renderPosts(searchInput ? searchInput.value.trim() : "");
+      }
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      currentPage++;
+      renderPosts(searchInput ? searchInput.value.trim() : "");
+    });
+  }
+
+  /* =========================================================
+     3. Dynamic Blog Data & Search Engine (Auto-Sorted Newest First)
+     ========================================================= */
   let dynamicBlogDatabase = [
     {
       id: "featured-1",
-      isFeatured: true,
+      date: "2026-08-10", 
       title: "Building the Ultimate Minimalist Sony A6700 Rig",
       category: "Tech & Gear",
       meta: "AUG 10 • 10 MIN READ",
       img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=80",
       excerpt: "Building a minimalist rig for the Sony A6700 requires balancing weight, functionality, and speed.",
       content: "Building a minimalist rig for the Sony A6700 requires balancing weight, functionality, and speed. In this article, we break down the top cages, top handles, and lightweight audio options for run-and-gun filmmaking."
-    },
-    {
-      id: "fallback-2",
-      isFeatured: false,
-      title: "Designing a Distraction-Free Workspace",
-      category: "Workflow",
-      meta: "AUG 10 • 4 MIN READ",
-      img: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80",
-      excerpt: "A clean desk layout is more than just aesthetics...",
-      content: "A clean desk layout is more than just aesthetics. Reducing physical clutter directly correlates with reducing mental overhead when starting deep creative work blocks."
-    },
-    {
-      id: "fallback-3",
-      isFeatured: false,
-      title: "My DaVinci Resolve Color Grading Process",
-      category: "Video Editing",
-      meta: "AUG 10 • 8 MIN READ",
-      img: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600&q=80",
-      excerpt: "Color grading doesn't have to be overwhelming...",
-      content: "Color grading in DaVinci Resolve doesn't have to be overwhelming. Here is my 4-node tree template for achieving filmic skin tones and organic warmth every time."
     }
   ];
-
+  
   const featuredContainer = document.getElementById('featured-hero-container');
   const gridContainer = document.getElementById('dynamic-blog-grid');
   const searchInput = document.getElementById('blog-search-input');
@@ -72,6 +95,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function renderPosts(searchQuery = "") {
     if (!featuredContainer || !gridContainer) return;
 
+    // 1. Sort posts by date descending (newest first)
+    dynamicBlogDatabase.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // 2. Filter posts based on user search query
     const filteredPosts = dynamicBlogDatabase.filter(post => 
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -82,8 +109,16 @@ document.addEventListener('DOMContentLoaded', () => {
       noResultsMsg.style.display = (filteredPosts.length === 0) ? 'block' : 'none';
     }
 
-    const featuredPost = filteredPosts.find(p => p.isFeatured) || filteredPosts[0];
-    if (featuredPost && searchQuery === "") {
+    // Setup pagination count based on filtered elements
+    setupPagination(filteredPosts.length);
+
+    // 3. Slice posts for current pagination page
+    const startIndex = (currentPage - 1) * postsPerPage;
+    const paginatedPosts = filteredPosts.slice(startIndex, startIndex + postsPerPage);
+
+    // 4. The absolute newest post automatically becomes the Bento Hero card (if on page 1 and no search query)
+    const featuredPost = paginatedPosts[0];
+    if (featuredPost && searchQuery === "" && currentPage === 1) {
       featuredContainer.style.display = "block";
       featuredContainer.innerHTML = `
         <article class="bento-hero__main clickable-post" data-content="${encodeURIComponent(featuredPost.content)}">
@@ -105,7 +140,8 @@ document.addEventListener('DOMContentLoaded', () => {
       featuredContainer.innerHTML = "";
     }
 
-    const gridPosts = searchQuery === "" ? filteredPosts.filter(p => !p.isFeatured) : filteredPosts;
+    // 5. Remaining posts populate the grid below
+    const gridPosts = (searchQuery === "" && currentPage === 1) ? paginatedPosts.slice(1) : paginatedPosts;
 
     // Save existing warning messages if they exist so we don't overwrite them
     const existingWarnings = gridContainer.querySelectorAll('.diagnostic-message');
@@ -123,7 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ${post.category}
           </span>
           <h3 class="soft-card__title">${post.title}</h3>
-          <p class="soft-card__desc">${post.excerpt}</p>
+          <p class="soft-card__desc">${post.excerpt || post.content.substring(0, 80) + '...'}</p>
           <p class="soft-card__meta">${post.meta}</p>
         </div>
       </article>
@@ -134,15 +170,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
+      currentPage = 1; // Reset to page 1 on search
       renderPosts(e.target.value.trim());
     });
   }
 
-  // Render initial fallback posts instantly
+  // Render initial posts instantly
   renderPosts();
 
   /* =========================================================
-     3. Fetch CMS Markdown Posts from GitHub (WITH DIAGNOSTICS)
+     4. Fetch CMS Markdown Posts from GitHub (WITH DIAGNOSTICS)
      ========================================================= */
   async function loadCMSBlogPosts() {
     const repo = 'OlliKm/OKM.WEB'; 
@@ -151,7 +188,6 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const response = await fetch(`https://api.github.com/repos/${repo}/contents/${folder}`);
       
-      // DIAGNOSTIC: If GitHub blocks us, show why on the screen
       if (!response.ok) {
         let errorReason = `Status ${response.status}: ${response.statusText}.`;
         if (response.status === 404) {
@@ -167,7 +203,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
           `);
         }
-        return; // Stop running
+        return;
       }
 
       const files = await response.json();
@@ -192,7 +228,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
           dynamicBlogDatabase.push({
             id: file.sha,
-            isFeatured: false,
+            date: "2026-08-15",
             title: title,
             category: "CMS Post",
             meta: "LIVE CMS DATA",
@@ -221,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================================
-     4. Article Reader Modal 
+     5. Article Reader Modal 
      ========================================================= */
   const modal = document.getElementById('article-modal');
   const closeBtn = document.getElementById('article-modal-close');
@@ -276,7 +312,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* =========================================================
-     5. Universal Newsletter Form Handler
+     6. Universal Newsletter Form Handler
      ========================================================= */
   const newsletterForm = document.getElementById('newsletter-form');
   if (newsletterForm) {
@@ -291,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================================
-     6. Web3Forms Contact Form Handler
+     7. Web3Forms Contact Form Handler
      ========================================================= */
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {

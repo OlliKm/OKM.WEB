@@ -1,10 +1,9 @@
-
 backend:
   name: github
-  repo: OlliKm/OKM.WEB  # Replace with your actual repo name
+  repo: OlliKm/OKM.WEB  # Make sure this matches your actual GitHub repo
   branch: main
   base_url: https://ollikm.com
-  auth_endpoint: api/auth
+  auth_endpoint: api/auth            # This targets functions/auth.js
 
 media_folder: "images/uploads"
 public_folder: "images/uploads"

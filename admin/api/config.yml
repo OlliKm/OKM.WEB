@@ -10,8 +10,8 @@ public_folder: "images/uploads"
 
 collections:
   - name: "blog"
-    label: "Blog Posts"
-    folder: "blog-posts"       # This creates a 'blog-posts' folder at your project root
+    label: "content/blog"
+    folder: "content/blog"       # This creates a 'blog-posts' folder at your project root
     create: true
     slug: "{{slug}}"
     fields:

@@ -1,7 +1,20 @@
 ---
-title: DJI Osmo pocket 4p
-date: 2026-07-31T23:52:00.000+01:00
-image: images/uploads/djipocket4p.jpg
+title: DJI Osmo Pocket 4P
+date: 2026-07-31
+image: images/uploads/djip4web.jpg
 ---
-bought for around £540 on amazon japan this compact camera is amazing
-buy it now 
+
+This is your post content...
+
+Should you buy yourself a MacBook pro in 2026 
+vnervnrgnrger
+f
+ferw
+fre
+fer
+fer
+f
+erf
+erf
+er
+fer

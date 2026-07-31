@@ -2236,4 +2236,137 @@ body.about-style-body {
   .contact-form-wrapper,
   .contact-form-card { padding: 28px; }
   .hero-image-container { height: 280px; }
+
+  /* =========================================================
+   Mobile Responsiveness & Viewport Fixes (Phones & Tablets)
+   ========================================================= */
+
+@media (max-width: 768px) {
+  /* 1. Global Spacing & Layout Structure */
+  body {
+    overflow-x: hidden;
+  }
+  
+  .page-canvas-wrapper, 
+  .contact-app-container,
+  .hybrid-container {
+    padding: 16px 12px;
+  }
+
+  .page-canvas,
+  .app-window,
+  .contact-window,
+  .contact-form-wrapper,
+  .contact-form-card {
+    padding: 20px 16px;
+    border-radius: 16px;
+  }
+
+  /* 2. Navigation Header & Menu */
+  .app-nav {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .app-nav__links {
+    display: none; /* Hide heavy nav links on small screens to save space */
+  }
+
+  .app-nav__actions {
+    margin-left: auto;
+  }
+
+  /* 3. Hero Sections & Bento Grids */
+  .bento-hero,
+  .bento-grid,
+  .three-card-grid,
+  .posts-grid,
+  .values-grid,
+  .directory-grid,
+  .bio-tables-grid,
+  .footer__grid,
+  .contact-grid {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+
+  .serif-hero-title {
+    font-size: clamp(40px, 12vw, 64px) !important;
+  }
+
+  .bento-hero__img-wrapper {
+    min-height: 280px;
+  }
+
+  /* 4. Search Bar Fixes */
+  .cards-section__header {
+    flex-direction: column;
+    align-items: stretch !important;
+    gap: 12px;
+  }
+
+  #blog-search-input {
+    max-width: 100% !important;
+    width: 100% !important;
+  }
+
+  /* 5. Article Reader Modal Mobile Adaptation */
+  .article-modal {
+    padding: 10px;
+  }
+
+  .article-modal__sheet {
+    max-height: 92vh;
+    padding: 20px 16px;
+    border-radius: 20px;
+  }
+
+  .article-modal__hero-image {
+    height: 200px;
+  }
+
+  .article-modal__title {
+    font-size: 24px;
+  }
+
+  .article-modal__close {
+    top: 16px;
+    right: 16px;
+  }
+
+  /* 6. Forms & Inputs */
+  .form-row {
+    grid-template-columns: 1fr !important;
+    gap: 16px;
+  }
+
+  .bento-submit-btn,
+  .submit-btn,
+  .submit-btn-primary {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* 7. Footers */
+  .footer__nav-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+}
+
+/* Extra small devices (iPhone SE / older phones) */
+@media (max-width: 480px) {
+  .serif-hero-title {
+    font-size: 36px !important;
+  }
+  
+  .app-nav__logo {
+    font-size: 15px;
+  }
+
+  .status-pill {
+    font-size: 10px;
+    padding: 4px 10px;
+  }
+}
 }

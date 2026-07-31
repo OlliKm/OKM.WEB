@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   /* =========================================================
-     1. Interactive Tab Switcher (Index & About Pages)
+     1. Interactive Tab Switcher
      ========================================================= */
   const tabButtons = document.querySelectorAll('[data-tab-target]');
   const textPanels = document.querySelectorAll('.tab-text-panel');
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
      2. Dynamic Blog Data & Search Engine
      ========================================================= */
   
-  // Base database with your fallback/featured posts
+  // Base database with fallback posts so the page is never empty
   let dynamicBlogDatabase = [
     {
       id: "featured-1",
@@ -41,6 +41,26 @@ document.addEventListener('DOMContentLoaded', () => {
       img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=80",
       excerpt: "Building a minimalist rig for the Sony A6700 requires balancing weight, functionality, and speed.",
       content: "Building a minimalist rig for the Sony A6700 requires balancing weight, functionality, and speed. In this article, we break down the top cages, top handles, and lightweight audio options for run-and-gun filmmaking."
+    },
+    {
+      id: "fallback-2",
+      isFeatured: false,
+      title: "Designing a Distraction-Free Workspace",
+      category: "Workflow",
+      meta: "AUG 10 • 4 MIN READ",
+      img: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80",
+      excerpt: "A clean desk layout is more than just aesthetics...",
+      content: "A clean desk layout is more than just aesthetics. Reducing physical clutter directly correlates with reducing mental overhead when starting deep creative work blocks."
+    },
+    {
+      id: "fallback-3",
+      isFeatured: false,
+      title: "My DaVinci Resolve Color Grading Process",
+      category: "Video Editing",
+      meta: "AUG 10 • 8 MIN READ",
+      img: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600&q=80",
+      excerpt: "Color grading doesn't have to be overwhelming...",
+      content: "Color grading in DaVinci Resolve doesn't have to be overwhelming. Here is my 4-node tree template for achieving filmic skin tones and organic warmth every time."
     }
   ];
 
@@ -49,23 +69,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const searchInput = document.getElementById('blog-search-input');
   const noResultsMsg = document.getElementById('no-results-msg');
 
-  // Function to render posts to the screen
   function renderPosts(searchQuery = "") {
     if (!featuredContainer || !gridContainer) return;
 
-    // Filter by search query
     const filteredPosts = dynamicBlogDatabase.filter(post => 
       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
       post.content.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-    // Toggle No Results Message
     if (noResultsMsg) {
       noResultsMsg.style.display = (filteredPosts.length === 0) ? 'block' : 'none';
     }
 
-    // Render Featured Post (hide if actively searching)
     const featuredPost = filteredPosts.find(p => p.isFeatured) || filteredPosts[0];
     if (featuredPost && searchQuery === "") {
       featuredContainer.style.display = "block";
@@ -89,12 +105,14 @@ document.addEventListener('DOMContentLoaded', () => {
       featuredContainer.innerHTML = "";
     }
 
-    // Render Grid Posts
-    const gridPosts = searchQuery === "" 
-      ? filteredPosts.filter(p => !p.isFeatured) 
-      : filteredPosts;
+    const gridPosts = searchQuery === "" ? filteredPosts.filter(p => !p.isFeatured) : filteredPosts;
 
-    gridContainer.innerHTML = gridPosts.map(post => `
+    // Save existing warning messages if they exist so we don't overwrite them
+    const existingWarnings = gridContainer.querySelectorAll('.diagnostic-message');
+    let warningsHTML = '';
+    existingWarnings.forEach(w => warningsHTML += w.outerHTML);
+
+    gridContainer.innerHTML = warningsHTML + gridPosts.map(post => `
       <article class="soft-card clickable-post" data-content="${encodeURIComponent(post.content)}">
         <div class="soft-card__image">
           <img src="${post.img}" alt="${post.title}">
@@ -114,41 +132,55 @@ document.addEventListener('DOMContentLoaded', () => {
     bindModalEvents();
   }
 
-  // Bind Search Input
   if (searchInput) {
     searchInput.addEventListener('input', (e) => {
       renderPosts(e.target.value.trim());
     });
   }
 
-  // Initial render for fallback data
+  // Render initial fallback posts instantly
   renderPosts();
 
-
   /* =========================================================
-     3. Fetch CMS Markdown Posts from GitHub
+     3. Fetch CMS Markdown Posts from GitHub (WITH DIAGNOSTICS)
      ========================================================= */
   async function loadCMSBlogPosts() {
     const repo = 'OlliKm/OKM.WEB'; 
     const folder = 'content/blog';
 
     try {
-      // Fetch the directory contents from GitHub
       const response = await fetch(`https://api.github.com/repos/${repo}/contents/${folder}`);
+      
+      // DIAGNOSTIC: If GitHub blocks us, show why on the screen
+      if (!response.ok) {
+        let errorReason = `Status ${response.status}: ${response.statusText}.`;
+        if (response.status === 404) {
+           errorReason += " (Make sure your GitHub repository is set to PUBLIC, not Private, and the folder path is exactly correct.)";
+        } else if (response.status === 403) {
+           errorReason += " (GitHub API rate limit reached. Try again in an hour.)";
+        }
+        
+        if (gridContainer) {
+          gridContainer.insertAdjacentHTML('afterbegin', `
+            <div class="diagnostic-message" style="grid-column: 1 / -1; padding: 1.5rem; background: #ffebee; color: #c62828; border-radius: 8px; border: 1px solid #ef9a9a; margin-bottom: 2rem;">
+              <strong>⚠️ GitHub Fetch Error:</strong> ${errorReason}
+            </div>
+          `);
+        }
+        return; // Stop running
+      }
+
       const files = await response.json();
 
       if (!Array.isArray(files)) return;
 
-      // Loop through the files found in the folder
       for (const file of files) {
         if (file.name.endsWith('.md')) {
-          // Format the title from the file name
           const rawTitle = file.name.replace('.md', '').replace(/-/g, ' ');
           const title = rawTitle.charAt(0).toUpperCase() + rawTitle.slice(1);
           
           let fileContent = `Loading content for ${title}...`;
           
-          // Fetch the actual text inside the markdown file
           try {
             const mdResponse = await fetch(file.download_url);
             if (mdResponse.ok) {
@@ -158,33 +190,35 @@ document.addEventListener('DOMContentLoaded', () => {
             console.error(`Failed to load content for ${file.name}`, contentError);
           }
 
-          // Add it to our dynamic database
           dynamicBlogDatabase.push({
             id: file.sha,
             isFeatured: false,
             title: title,
             category: "CMS Post",
             meta: "LIVE CMS DATA",
-            img: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=600&q=80", // Placeholder image for markdown files
+            img: "https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=600&q=80",
             excerpt: "Read more about this topic...",
             content: fileContent
           });
         }
       }
 
-      // Re-render the UI now that the GitHub files have been added to the array
       renderPosts(searchInput ? searchInput.value.trim() : "");
 
     } catch (error) {
-      console.error('Error fetching CMS posts:', error);
+       if (gridContainer) {
+          gridContainer.insertAdjacentHTML('afterbegin', `
+            <div class="diagnostic-message" style="grid-column: 1 / -1; padding: 1.5rem; background: #ffebee; color: #c62828; border-radius: 8px; border: 1px solid #ef9a9a; margin-bottom: 2rem;">
+              <strong>⚠️ Network Error:</strong> Could not connect to GitHub at all.
+            </div>
+          `);
+        }
     }
   }
 
-  // Trigger the fetch immediately
   if (gridContainer) {
     loadCMSBlogPosts();
   }
-
 
   /* =========================================================
      4. Article Reader Modal 
@@ -205,16 +239,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const imgSrc = imgObj ? imgObj.src : '';
         const encodedContent = post.getAttribute('data-content') || '';
         
-        // Decode the content safely so quotes don't break the HTML
         const content = decodeURIComponent(encodedContent);
-        
         const badgeText = post.querySelector('.pill-badge')?.textContent?.trim() || 'Article';
 
         document.getElementById('modal-title').textContent = title;
         document.getElementById('modal-meta').textContent = meta;
         document.getElementById('modal-img').src = imgSrc;
         
-        // Replace newlines with <br> tags so Markdown paragraphs render properly in the modal
         const formattedContent = content.replace(/\n/g, '<br>');
         document.getElementById('modal-body').innerHTML = `<p>${formattedContent}</p>`;
         
@@ -245,18 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* =========================================================
-     5. Pagination Highlights (Blog Page)
-     ========================================================= */
-  const pageNumbers = document.querySelectorAll('.page-num');
-  pageNumbers.forEach(num => {
-    num.addEventListener('click', () => {
-      pageNumbers.forEach(n => n.classList.remove('active'));
-      num.classList.add('active');
-    });
-  });
-
-  /* =========================================================
-     6. Universal Newsletter Form Handler
+     5. Universal Newsletter Form Handler
      ========================================================= */
   const newsletterForm = document.getElementById('newsletter-form');
   if (newsletterForm) {
@@ -271,7 +291,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   /* =========================================================
-     7. Web3Forms Contact Form Handler
+     6. Web3Forms Contact Form Handler
      ========================================================= */
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {

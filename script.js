@@ -74,18 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* =========================================================
      3. Dynamic Blog Data & Search Engine (Auto-Sorted Newest First)
      ========================================================= */
-  let dynamicBlogDatabase = [
-    {
-      id: "featured-1",
-      date: "2026-08-10", 
-      title: "Building the Ultimate Minimalist Sony A6700 Rig",
-      category: "Tech & Gear",
-      meta: "AUG 10 • 10 MIN READ",
-      img: "https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=80",
-      excerpt: "Building a minimalist rig for the Sony A6700 requires balancing weight, functionality, and speed.",
-      content: "Building a minimalist rig for the Sony A6700 requires balancing weight, functionality, and speed. In this article, we break down the top cages, top handles, and lightweight audio options for run-and-gun filmmaking."
-    }
-  ];
+  let dynamicBlogDatabase = [];
   
   const featuredContainer = document.getElementById('featured-hero-container');
   const gridContainer = document.getElementById('dynamic-blog-grid');
@@ -116,32 +105,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const startIndex = (currentPage - 1) * postsPerPage;
     const paginatedPosts = filteredPosts.slice(startIndex, startIndex + postsPerPage);
 
-    // 4. The absolute newest post automatically becomes the Bento Hero card (if on page 1 and no search query)
-    const featuredPost = paginatedPosts[0];
-    if (featuredPost && searchQuery === "" && currentPage === 1) {
-      featuredContainer.style.display = "block";
-      featuredContainer.innerHTML = `
-        <article class="bento-hero__main clickable-post" data-content="${encodeURIComponent(featuredPost.content)}">
-          <div class="bento-hero__img-wrapper">
-            <img src="${featuredPost.img}" alt="${featuredPost.title}">
-            <div class="bento-hero__overlay">
-              <span class="pill-badge">
-                <span class="pill-badge__dot"></span>
-                ${featuredPost.category}
-              </span>
-              <h2 class="bento-hero__title">${featuredPost.title}</h2>
-              <p class="bento-hero__meta">${featuredPost.meta}</p>
-            </div>
-          </div>
-        </article>
-      `;
-    } else {
+    // 4. Hide the large Bento Hero container entirely so all posts display uniformly in the grid
+    if (featuredContainer) {
       featuredContainer.style.display = "none";
       featuredContainer.innerHTML = "";
     }
 
-    // 5. Remaining posts populate the grid below
-    const gridPosts = (searchQuery === "" && currentPage === 1) ? paginatedPosts.slice(1) : paginatedPosts;
+    // 5. Render ALL posts evenly into the grid cards
+    const gridPosts = paginatedPosts;
 
     // Save existing warning messages if they exist so we don't overwrite them
     const existingWarnings = gridContainer.querySelectorAll('.diagnostic-message');

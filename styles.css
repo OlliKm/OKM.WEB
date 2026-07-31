@@ -2391,3 +2391,44 @@ body.about-style-body {
     grid-template-columns: 1fr !important;
   }
 }
+/* =========================================================
+   Centered Search Bar Update
+   ========================================================= */
+.cards-section__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+  text-align: center;
+}
+
+.cards-section__header .section-title {
+  margin-bottom: 16px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#blog-search-input {
+  width: 100%;
+  max-width: 480px;
+  padding: 12px 20px;
+  border-radius: 24px;
+  border: 1px solid #d0c8bf;
+  font-size: 0.95rem;
+  text-align: center;
+  outline: none;
+  background-color: #faf8f5;
+  transition: all 0.2s ease;
+}
+
+#blog-search-input:focus {
+  border-color: #8C3B2B;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}

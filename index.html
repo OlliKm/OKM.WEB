@@ -3,209 +3,143 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Olli Km — Youtube Creator, Tech Enthusiast & Storyteller</title>
+  <title>Olli Km — Creator & Storyteller</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="about-style-body">
 
-  <!-- NAV -->
-  <header class="nav">
-    <div class="nav__inner">
-      <a href="index.html" class="nav__logo" aria-label="Olli Km home">
-        <span class="logo-text">OLLI KM</span>
-      </a>
-
-      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle Navigation">
-        <span></span><span></span><span></span>
-      </button>
-
-      <nav class="nav__links" id="nav-links">
-        <a href="about.html">About</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html">Contact</a>
+  <!-- LIGHT APP NAVIGATION HEADER -->
+  <header class="app-nav-wrapper">
+    <div class="app-nav">
+      <a href="index.html" class="app-nav__logo">OLLI KM</a>
+      <nav class="app-nav__links">
+        <a href="index.html" class="active">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="blog.html">BLOG</a>
+        <a href="contact.html">CONTACT</a>
       </nav>
-
-      <a class="nav__social" href="https://www.youtube.com/@OlliKm" target="_blank" rel="noopener">Youtube</a>
+      <div class="app-nav__actions">
+        <a href="https://www.youtube.com/@OlliKm" target="_blank" rel="noopener noreferrer" class="nav-btn-primary">YouTube</a>
+      </div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero__bg">
-      <video autoplay loop muted playsinline poster="https://framerusercontent.com/images/f2rn08afbrtsEUrreXvq5zwhVk.jpeg">
-      </video>
-      <div class="hero__overlay"></div>
-    </div>
+  <!-- FLOATING APP CANVAS CONTAINER -->
+  <div class="page-canvas-wrapper">
+    <main class="page-canvas">
 
-    <div class="hero__watermark">OLLI KM</div>
-
-    <div class="hero__content">
-      <div class="hero__eyebrows">
-        <span class="hero__eyebrow-left">TECH REVIEWS , NOVEL IDEAS, PORTFOLIO WORK</span>
-        <span class="hero__eyebrow-right">BY OLLI</span>
-      </div>
-
-      <div class="hero__bottom-row">
-        <h1 class="hero__title">
-          Youtube Creator ,<br>
-          Tech Enthusiast &amp; Storyteller
-        </h1>
-
-        <div class="hero__video-card">
-          <div class="hero__video-wrapper">
-            <img src="https://i.ytimg.com/vi_webp/jwesm5OXnQU/sddefault.webp" alt="Video preview thumbnail">
-            <button class="play-btn" data-video="https://www.youtube.com/embed/jwesm5OXnQU?autoplay=1" aria-label="Play video">
-              <svg width="48" height="34" viewBox="0 0 68 48" fill="none">
-                <path d="M66.52 7.74C65.74 4.81 64.03 2.33 61.1 1.55C55.79 0.13 34 0 34 0C34 0 12.21 0.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74C0.06 13.05 0 24 0 24C0 24 0.06 34.95 1.48 40.26C2.26 43.19 3.97 45.67 6.9 46.45C12.21 47.87 34 48 34 48C34 48 55.79 47.87 61.1 46.45C64.03 45.67 65.74 43.19 66.52 40.26C67.94 34.95 68 24 68 24C68 24 67.94 13.05 66.52 7.74Z" fill="#16231b" fill-opacity="0.9"/>
-                <path d="M45 24L27 14V34" fill="white"/>
-              </svg>
-            </button>
-          </div>
-          <span class="hero__video-caption">WATCH VIDEO</span>
+      <!-- HERO / HEADER SECTION -->
+      <section class="canvas-header">
+        <span class="korean-subtitle">올리 KM</span>
+        <h1 class="serif-hero-title">OLLI KM</h1>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span>CREATOR, STORYTELLER & DESIGNER</span>
         </div>
-      </div>
-    </div>
-  </section>
+      </section>
 
-  <!-- INTERACTIVE VERTICAL TABS SECTION -->
-  <section class="section section--dark-tabs">
-    <div class="tabs-grid">
-      
-      <!-- LEFT COLUMN: DYNAMIC TEXT & VERTICAL MENU -->
-      <div class="tabs-left">
-        <!-- Content Panel 1: My Content -->
-        <div class="tab-text-panel" id="text-content">
-          <h2 class="tab-panel__title">My Videos</h2>
-          <p class="tab-panel__desc">Check out some of my latest YouTube uploads, tech reviews, and daily vlogs.</p>
-        </div>
+      <!-- HERO MEDIA BANNER -->
+      <section class="hero-image-container">
+        <img src="images/homepage.jpeg" alt="Olli Km homepage" class="hero-banner-img">
+      </section>
 
-        <!-- Content Panel 2: DJI Osmo -->
-        <div class="tab-text-panel" id="text-osmo">
-          <h2 class="tab-panel__title">DJI Osmo Pocket 3</h2>
-          <div class="tab-panel__mono-list">
-            <span class="mono-label">MY TRAVEL RIG</span>
-            <span>CREATOR COMBO</span>
-            <span>DJI MIC 2 TRANSMITTER</span>
-            <span>ND FILTER SET</span>
-          </div>
-        </div>
-
-        <!-- Content Panel 3: Sony A6700 (Active Default) -->
-        <div class="tab-text-panel active" id="text-sony">
-          <h2 class="tab-panel__title">Sony A6700</h2>
-          <div class="tab-panel__mono-list">
-            <span class="mono-label">CURRENT LENSES I OWN</span>
-            <span>SIGMA 18-50MM F/2.8</span>
-            <span>TAMRON 17-70MM F/2.8</span>
-            <span>KIT LENS</span>
-          </div>
-        </div>
-
-        <!-- Content Panel 4: Youtube Inspiration -->
-        <div class="tab-text-panel" id="text-inspiration">
-          <h2 class="tab-panel__title">The Youtubers<br>I Enjoy Watching</h2>
-        </div>
-
-        <!-- Vertical Navigation Buttons List -->
-        <div class="vertical-tab-list" role="tablist">
-          <button class="v-tab-btn" data-tab="content" role="tab">
-            <svg class="v-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-            <span>My Content</span>
-          </button>
-
-          <button class="v-tab-btn" data-tab="osmo" role="tab">
-            <svg class="v-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="3"/><circle cx="12" cy="7" r="2.5"/><rect x="9" y="13" width="6" height="5" rx="1"/></svg>
-            <span>DJI OSMO POCKET 4P</span>
-          </button>
-
-          <button class="v-tab-btn active" data-tab="sony" role="tab">
-            <svg class="v-tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
-            <span>SONY A6700</span>
-          </button>
-
-          <button class="v-tab-btn" data-tab="inspiration" role="tab">
-            <svg class="v-tab-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-            <span>Youtube Inspiration</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- RIGHT COLUMN: DYNAMIC MEDIA CONTENT -->
-      <div class="tabs-right">
-        <!-- Media Panel 1: My Content -->
-        <div class="tab-media-panel" id="media-content">
-          <div class="video-grid-2col">
-            <div class="v-card">
-              <img src="https://i.ytimg.com/vi_webp/4opxB0Tn7pM/sddefault.webp" alt="Video thumbnail">
-              <button class="play-btn" data-video="https://www.youtube.com/embed/4opxB0Tn7pM?autoplay=1" aria-label="Play video"><svg width="48" height="34" viewBox="0 0 68 48"><path d="M66.52 7.74C65.74 4.81 64.03 2.33 61.1 1.55C55.79 0.13 34 0 34 0C34 0 12.21 0.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74C0.06 13.05 0 24 0 24C0 24 0.06 34.95 1.48 40.26C2.26 43.19 3.97 45.67 6.9 46.45C12.21 47.87 34 48 34 48C34 48 55.79 47.87 61.1 46.45C64.03 45.67 65.74 43.19 66.52 40.26C67.94 34.95 68 24 68 24C68 24 67.94 13.05 66.52 7.74Z" fill="#16231b"/><path d="M45 24L27 14V34" fill="white"/></svg></button>
+      <!-- INTERACTIVE TABBED FEATURE SECTION -->
+      <section class="tabs-grid-light">
+        
+        <!-- Left Column: Dynamic Text & Switcher -->
+        <div class="tabs-left">
+          
+          <!-- Text Panel 1 -->
+          <div class="tab-text-panel active" data-tab="1">
+            <h2 class="serif-section-title">Big Camera</h2>
+            <p class="tab-panel__desc" style="font-size: 15px; color: #515154; line-height: 1.6; margin-bottom: 24px;">
+              Designing compact, highly capable camera rigs and lightweight audio setups built for effortless run-and-gun filmmaking.
+            </p>
+            <div class="tab-panel__mono-list-light">
+              <div><span class="mono-label-rust">BODY:</span> SONY A6700</div>
+              <div><span class="mono-label-rust">PRIMARY LENS:</span> 18-50MM F2.8</div>
             </div>
           </div>
-        </div>
 
-        <!-- Media Panel 2: DJI Osmo -->
-        <div class="tab-media-panel" id="media-osmo">
-          <div class="image-showcase">
-            <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=1000&q=80" alt="DJI Osmo Pocket Camera">
-          </div>
-        </div>
-
-        <!-- Media Panel 3: Sony A6700 (Active Default) -->
-        <div class="tab-media-panel active" id="media-sony">
-          <div class="image-showcase">
-            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1000&q=80" alt="Sony A6700 Camera setup">
-            <div class="glass-badge">
-              FRANCO REFLECTS A COMMITMENT TO INNOVATION AND THOUGHTFUL DESIGN
+          <!-- Text Panel 2 -->
+          <div class="tab-text-panel" data-tab="2">
+            <h2 class="serif-section-title">Little camera</h2>
+            <p class="tab-panel__desc" style="font-size: 15px; color: #515154; line-height: 1.6; margin-bottom: 24px;">
+              Building workspace environments that minimize physical clutter to maximize creative focus and deep work productivity.
+            </p>
+            <div class="tab-panel__mono-list-light">
+              <div><span class="mono-label-rust">BODY:</span> DJI OSMO POCKET 4P</div>
+              <div><span class="mono-label-rust">AUDIO:</span> DJI MIC 3</div>
             </div>
           </div>
-        </div>
 
-        <!-- Media Panel 4: Youtube Inspiration -->
-        <div class="tab-media-panel" id="media-inspiration">
-          <div class="stacked-video-list">
-            <div class="v-card-stacked">
-              <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" alt="Coffee shop vlog">
-              <div class="v-card-stacked__overlay">
-                <span>MY LOFT APARTMENT COFFEE SHOP (the event)</span>
-              </div>
-              <button class="play-btn" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" aria-label="Play video"><svg width="48" height="34" viewBox="0 0 68 48"><path d="M66.52 7.74C65.74 4.81 64.03 2.33 61.1 1.55C55.79 0.13 34 0 34 0C34 0 12.21 0.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74C0.06 13.05 0 24 0 24C0 24 0.06 34.95 1.48 40.26C2.26 43.19 3.97 45.67 6.9 46.45C12.21 47.87 34 48 34 48C34 48 55.79 47.87 61.1 46.45C64.03 45.67 65.74 43.19 66.52 40.26C67.94 34.95 68 24 68 24C68 24 67.94 13.05 66.52 7.74Z" fill="#16231b"/><path d="M45 24L27 14V34" fill="white"/></svg></button>
-            </div>
-            <div class="v-card-stacked">
-              <img src="https://images.unsplash.com/photo-1477959858617-67f30ac4ce6d?auto=format&fit=crop&w=800&q=80" alt="New year reset vlog">
-              <div class="v-card-stacked__overlay">
-                <span>new year reset LIVING ALONE TORONTO</span>
-              </div>
-              <button class="play-btn" data-video="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1" aria-label="Play video"><svg width="48" height="34" viewBox="0 0 68 48"><path d="M66.52 7.74C65.74 4.81 64.03 2.33 61.1 1.55C55.79 0.13 34 0 34 0C34 0 12.21 0.13 6.9 1.55C3.97 2.33 2.27 4.81 1.48 7.74C0.06 13.05 0 24 0 24C0 24 0.06 34.95 1.48 40.26C2.26 43.19 3.97 45.67 6.9 46.45C12.21 47.87 34 48 34 48C34 48 55.79 47.87 61.1 46.45C64.03 45.67 65.74 43.19 66.52 40.26C67.94 34.95 68 24 68 24C68 24 67.94 13.05 66.52 7.74Z" fill="#16231b"/><path d="M45 24L27 14V34" fill="white"/></svg></button>
+          <!-- Text Panel 3 -->
+          <div class="tab-text-panel" data-tab="3">
+            <h2 class="serif-section-title">Digital Workflows</h2>
+            <p class="tab-panel__desc" style="font-size: 15px; color: #515154; line-height: 1.6; margin-bottom: 24px;">
+              Establishing structured DaVinci Resolve grading trees, automated backup architectures, and seamless post-production pipelines.
+            </p>
+            <div class="tab-panel__mono-list-light">
+              <div><span class="mono-label-rust">SOFTWARE:</span> DAVINCI RESOLVE STUDIO</div>
+              <div><span class="mono-label-rust">COLOR:</span> LOG TO REC.709 FILM LOOK</div>
             </div>
           </div>
+
+          <!-- Vertical Tab Switcher Buttons -->
+          <div class="vertical-tab-list-light">
+            <button type="button" class="v-tab-btn-light active" data-tab-target="1">01. CAMERA RIGS</button>
+            <button type="button" class="v-tab-btn-light" data-tab-target="2">02. WORKSPACE DESIGN</button>
+            <button type="button" class="v-tab-btn-light" data-tab-target="3">03. WORKFLOW & COLOR</button>
+          </div>
+
         </div>
-      </div>
 
-    </div>
-  </section>
+        <!-- Right Column: Media Panels -->
+        <div class="tabs-right">
+          
+          <div class="tab-media-panel active" data-tab="1">
+            <div class="image-showcase">
+              <img src="images/sa6700.JPG" alt="Camera Setup">
+            </div>
+          </div>
 
-  <!-- UNIVERSAL FOOTER (Add this block to all subpages) -->
+          <div class="tab-media-panel" data-tab="2">
+            <div class="image-showcase">
+              <img src="images/pocket4p2.JPG" alt="pocket4p">
+            </div>
+          </div>
+
+          <div class="tab-media-panel" data-tab="3">
+            <div class="image-showcase">
+              <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=1000&q=80" alt="Editing Setup">
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+    </main>
+  </div>
+
+  <!-- SITE FOOTER -->
   <footer class="site-footer">
-    <!-- Top Image/Wave Banner Blend -->
     <div class="footer__wave-banner"></div>
-
     <div class="footer__content">
       <div class="footer__grid">
-        
-        <!-- Left: Branding & Newsletter -->
         <div class="footer__brand-col">
-          <div class="footer__logo">OLLI KM<span class="logo-sup">®</span></div>
-          <p class="footer__newsletter-label">SUBSCRIBE FOR OUR NEWSLETTER</p>
-          <form class="footer__form" id="newsletter-form">
-            <input type="email" placeholder="Email" required aria-label="Email address">
-            <button type="submit" aria-label="Subscribe">→</button>
+          <div class="footer__logo">OLLI KM <span class="logo-sup">®</span></div>
+          <div class="footer__newsletter-label">STAY UPDATED</div>
+          <form class="footer__form">
+            <input type="email" placeholder="Enter your email" class="footer__newsletter-input" required>
+            <button type="submit">→</button>
           </form>
-          <p class="footer__disclaimer">Your information is never disclosed to third parties.</p>
+          <p class="footer__disclaimer">No spam, unsubscribe anytime.</p>
         </div>
 
-        <!-- Right: 3-Column Navigation -->
         <nav class="footer__nav-grid">
           <div class="footer__col">
             <span class="footer__col-head">MAIN PAGES</span>
@@ -218,25 +152,15 @@
             <a href="contact.html">Tech</a>
           </div>
           <div class="footer__col">
-            <span class="footer__col-head">CONTACT &amp; OTHER</span>
+            <span class="footer__col-head">CONTACT & OTHER</span>
             <a href="contact.html">Contact</a>
           </div>
         </nav>
-
       </div>
 
-      <!-- Edge-to-Edge Huge Title Watermark -->
       <div class="footer__watermark-bottom">OLLI KM</div>
     </div>
   </footer>
-
-  <!-- Video Modal -->
-  <div class="video-modal" id="video-modal" hidden>
-    <button class="video-modal__close" id="video-modal-close" aria-label="Close video">&times;</button>
-    <div class="video-modal__frame">
-      <iframe id="video-modal-iframe" src="" title="Video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    </div>
-  </div>
 
   <script src="script.js"></script>
 </body>

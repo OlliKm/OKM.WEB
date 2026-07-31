@@ -9,123 +9,114 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="about-style-body">
 
-  <!-- NAV HEADER -->
-  <header class="nav">
-    <div class="nav__inner">
-      <a href="index.html" class="nav__logo" aria-label="Olli Km home">
-        <span class="logo-text">OLLI KM</span>
-      </a>
-
-      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle Navigation">
-        <span></span><span></span><span></span>
-      </button>
-
-      <nav class="nav__links" id="nav-links">
-        <a href="about.html">About</a>
-        <a href="blog.html">Blog</a>
-        <a href="contact.html" class="nav__link--active">Contact</a>
+  <!-- LIGHT NAVIGATION HEADER -->
+  <header class="app-nav-wrapper">
+    <div class="app-nav">
+      <a href="index.html" class="app-nav__logo">OLLI KM</a>
+      <nav class="app-nav__links">
+        <a href="index.html">HOME</a>
+        <a href="about.html">ABOUT</a>
+        <a href="blog.html">BLOG</a>
+        <a href="contact.html" class="active">CONTACT</a>
       </nav>
-
-      <a class="nav__social" href="https://www.youtube.com/@OlliKm" target="_blank" rel="noopener">Youtube</a>
+      <div class="app-nav__actions">
+        <a href="https://www.youtube.com/@OlliKm" target="_blank" class="nav-btn-primary">YouTube</a>
+      </div>
     </div>
   </header>
 
-  <!-- CONTACT HERO -->
-  <section class="contact-hero">
-    <div class="contact-hero__inner">
-      <span class="mono-tag">LET'S BUILD SOMETHING TOGETHER</span>
-      <h1 class="contact-hero__title">Get in Touch</h1>
-      <p class="contact-hero__subtitle">
-        Have a brand inquiry, sponsorship request, video project, or tech question? Drop a message below or email directly.
-      </p>
-    </div>
-  </section>
+  <!-- FLOATING APP CANVAS CONTAINER -->
+  <div class="page-canvas-wrapper">
+    <main class="page-canvas">
 
-  <!-- CONTACT SECTION GRID -->
-  <section class="contact-section">
-    <div class="contact-section__inner">
-      
-      <!-- Left: Direct Info & Socials -->
-      <div class="contact-info">
-        
-        <div class="status-badge">
+      <!-- HERO / HEADER SECTION -->
+      <section class="canvas-header">
+        <span class="korean-subtitle">연락하기</span>
+        <h1 class="serif-hero-title">GET IN TOUCH</h1>
+        <div class="status-pill">
           <span class="status-dot"></span>
-          <span>AVAILABLE FOR COLLABORATIONS</span>
+          <span>AVAILABLE FOR COLLABORATIONS & PROJECTS</span>
+        </div>
+      </section>
+
+      <!-- BENTO GRID (Rust Info Card + Form Card) -->
+      <section class="bento-grid">
+        
+        <!-- Left: Rust Accent Card -->
+        <div class="rust-card">
+          <div class="rust-card__header">
+            <span>DIRECT CONTACT</span>
+            <span>UK / REMOTE</span>
+          </div>
+          <div class="rust-card__body">
+            <p style="font-size: 20px; font-weight: 600; margin-bottom: 8px;">Let's create something together.</p>
+            <p>Have a video project, brand partnership, or workflow consultation in mind? Reach out directly via the form or email.</p>
+            <p style="font-family: monospace; font-size: 13px; margin-top: 24px; opacity: 0.9;">EMAIL: businessolli@gmail.com</p>
+          </div>
         </div>
 
-        <div class="contact-block">
-          <span class="contact-label">DIRECT EMAIL</span>
-          <a href="mailto:hello@ollikm.com" class="contact-email">hello@ollikm.com</a>
-        </div>
-
-        <div class="contact-block">
-          <span class="contact-label">LOCATION &amp; TIMEZONE</span>
-          <p class="contact-text">London, UK • GMT (UTC+0)</p>
-        </div>
-
-        <div class="contact-block">
-          <span class="contact-label">SOCIAL CHANNELS</span>
-          <ul class="contact-socials">
-            <li><a href="https://www.youtube.com/@OlliKm" target="_blank" rel="noopener">YouTube <span>↗</span></a></li>
-            <li><a href="#" target="_blank" rel="noopener">Instagram <span>↗</span></a></li>
-            <li><a href="#" target="_blank" rel="noopener">Twitter / X <span>↗</span></a></li>
-            <li><a href="#" target="_blank" rel="noopener">GitHub <span>↗</span></a></li>
-          </ul>
-        </div>
-
-      </div>
-
-      <!-- Right: Interactive Form -->
-      <div class="contact-form-wrapper">
-        <form class="contact-form" action="https://formspree.io/f/xyzyqwno" method="POST" id="main-contact-form">
-          
-          <div class="form-row">
-            <div class="form-group">
-              <label for="name">YOUR NAME *</label>
-              <input type="text" id="name" name="name" placeholder="John Doe" required>
+        <!-- Right: Contact Form Card -->
+        <div class="contact-form-bento-card">
+          <form class="bento-contact-form" id="contact-form">
+            <div class="bento-form-group">
+              <label for="name">NAME</label>
+              <input type="text" id="name" placeholder="Your Name" required>
             </div>
-            <div class="form-group">
-              <label for="email">YOUR EMAIL *</label>
-              <input type="email" id="email" name="email" placeholder="john@example.com" required>
+            <div class="bento-form-group">
+              <label for="email">EMAIL</label>
+              <input type="email" id="email" placeholder="your@email.com" required>
             </div>
+            <div class="bento-form-group">
+              <label for="subject">SUBJECT</label>
+              <input type="text" id="subject" placeholder="Project Inquiry / Collaboration">
+            </div>
+            <div class="bento-form-group">
+              <label for="message">MESSAGE</label>
+              <textarea id="message" rows="4" placeholder="Tell me about your project..." required></textarea>
+            </div>
+            <button type="submit" class="bento-submit-btn">SEND MESSAGE →</button>
+          </form>
+        </div>
+
+      </section>
+
+      <hr class="section-divider">
+
+      <!-- DIRECTORY / SOCIAL LINKS SECTION -->
+      <section class="directory-section">
+        <h2 class="serif-section-title">Directory & Socials</h2>
+        
+        <div class="directory-grid">
+          <div class="directory-col">
+            <h3>SOCIAL PLATFORMS</h3>
+            <ul class="directory-list">
+              <li><span class="list-year">YT</span><a href="https://www.youtube.com/@OlliKm" target="_blank" class="list-text">YouTube Channel</a></li>
+              <li><span class="list-year">IG</span><a href="https://www.instagram.com/olli.km_/" class="list-text">Instagram</a></li>
+              <li><span class="list-year">X</span><a href="https://github.com/OlliKm" class="list-text">Github</a></li>
+            </ul>
           </div>
 
-          <div class="form-group">
-            <label for="subject">INQUIRY TYPE</label>
-            <select id="subject" name="subject">
-              <option value="sponsorship">Sponsorship / Brand Collaboration</option>
-              <option value="video">Video Production / Editing</option>
-              <option value="gear">Gear &amp; Tech Question</option>
-              <option value="other">General / Other</option>
-            </select>
+
+          <div class="directory-col">
+            <h3>LOCATION & TIME</h3>
+            <ul class="directory-list">
+              <li><span class="list-year">LOC</span><span class="list-text">London, United Kingdom</span></li>
+              <li><span class="list-year">TZ</span><span class="list-text">GMT (UTC +0)</span></li>
+              <li><span class="list-year">NVL</span><span class="list-text">My Novel's</span></li>
+            </ul>
           </div>
+        </div>
+      </section>
 
-          <div class="form-group">
-            <label for="message">MESSAGE *</label>
-            <textarea id="message" name="message" rows="6" placeholder="Tell me about your project or inquiry..." required></textarea>
-          </div>
-
-          <button type="submit" class="submit-btn">
-            <span>Send Message</span>
-            <span class="btn-arrow">→</span>
-          </button>
-
-        </form>
-      </div>
-
-    </div>
-  </section>
+    </main>
+  </div>
 
   <!-- UNIVERSAL FOOTER -->
   <footer class="site-footer">
-    <div class="footer__wave-banner"></div>
-
     <div class="footer__content">
       <div class="footer__grid">
-        
-        <!-- Left: Branding & Newsletter -->
         <div class="footer__brand-col">
           <div class="footer__logo">OLLI KM<span class="logo-sup">®</span></div>
           <p class="footer__newsletter-label">SUBSCRIBE FOR OUR NEWSLETTER</p>
@@ -136,7 +127,6 @@
           <p class="footer__disclaimer">Your information is never disclosed to third parties.</p>
         </div>
 
-        <!-- Right: 3-Column Navigation -->
         <nav class="footer__nav-grid">
           <div class="footer__col">
             <span class="footer__col-head">MAIN PAGES</span>
@@ -146,17 +136,11 @@
           <div class="footer__col">
             <span class="footer__col-head">COMPANY</span>
             <a href="blog.html">Blog</a>
-            <a href="contact.html">Tech</a>
-          </div>
-          <div class="footer__col">
-            <span class="footer__col-head">CONTACT &amp; OTHER</span>
             <a href="contact.html">Contact</a>
           </div>
         </nav>
-
       </div>
 
-      <!-- Edge-to-Edge Watermark -->
       <div class="footer__watermark-bottom">OLLI KM</div>
     </div>
   </footer>

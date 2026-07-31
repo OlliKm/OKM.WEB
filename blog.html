@@ -9,149 +9,196 @@
   <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="about-style-body">
 
-  <!-- NAV HEADER -->
-  <header class="nav">
-    <div class="nav__inner">
-      <a href="index.html" class="nav__logo" aria-label="Olli Km home">
-        <span class="logo-text">OLLI KM</span>
-      </a>
-
-      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle Navigation">
-        <span></span><span></span><span></span>
-      </button>
-
-      <nav class="nav__links" id="nav-links">
-        <a href="about.html">About</a>
-        <a href="blog.html" class="nav__link--active">Blog</a>
-        <a href="contact.html">Contact</a>
+  <!-- LIGHT NAVIGATION HEADER -->
+  <header class="app-nav-wrapper">
+    <div class="app-nav">
+      <a href="index.html" class="app-nav__logo">OLLI KM</a>
+      <nav class="app-nav__links">
+        <a href="about.html">ABOUT</a>
+        <a href="blog.html" class="active">BLOG</a>
+        <a href="contact.html">CONTACT</a>
       </nav>
-
-      <a class="nav__social" href="https://www.youtube.com/@OlliKm" target="_blank" rel="noopener">Youtube</a>
+      <div class="app-nav__actions">
+        <a href="contact.html" class="nav-btn-primary">GET IN TOUCH</a>
+      </div>
     </div>
   </header>
 
-  <!-- BLOG HERO -->
-  <section class="blog-hero">
-    <div class="blog-hero__inner">
-      <span class="mono-tag">ESSAYS , GUIDES &amp; TECH THOUGHTS</span>
-      <h1 class="blog-hero__title">Writing &amp; Notes</h1>
-      
-      <!-- Category Filter Pills -->
-      <div class="blog-filters">
-        <button class="filter-pill active" data-filter="all">All Posts</button>
-        <button class="filter-pill" data-filter="tech">Tech &amp; Gear</button>
-        <button class="filter-pill" data-filter="workflow">Workflows</button>
-        <button class="filter-pill" data-filter="video">Video Editing</button>
-      </div>
-    </div>
-  </section>
+  <!-- FLOATING APP CANVAS CONTAINER -->
+  <div class="page-canvas-wrapper">
+    <main class="page-canvas">
 
-  <!-- FEATURED POST -->
-  <section class="blog-featured">
-    <div class="blog-featured__inner">
-      <a href="#" class="featured-card">
-        <div class="featured-card__image">
-          <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=80" alt="Sony camera rig">
-          <span class="category-badge">TECH &amp; GEAR</span>
+      <!-- HEADER SECTION -->
+      <section class="canvas-header">
+        <span class="korean-subtitle">블로그 & 아티클</span>
+        <h1 class="serif-hero-title">BLOG & INSIGHTS</h1>
+        <div class="status-pill">
+          <span class="status-dot"></span>
+          <span>TECH, GEAR & CREATIVE WORKFLOWS</span>
         </div>
-        <div class="featured-card__content">
-          <div class="post-meta">
-            <span>JULY 28, 2026</span>
-            <span class="dot">•</span>
-            <span>6 MIN READ</span>
+      </section>
+
+      <!-- FEATURED POST BENTO -->
+      <section class="bento-hero">
+        <article class="bento-hero__main clickable-post" data-content="Building a minimalist rig for the Sony A6700 requires balancing weight, functionality, and speed. In this article, we break down the top cages, top handles, and lightweight audio options for run-and-gun filmmaking.">
+          <div class="bento-hero__img-wrapper">
+            <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1200&q=80" alt="Sony camera rig">
+            <div class="bento-hero__overlay">
+              <span class="pill-badge">
+                <span class="pill-badge__dot"></span>
+                Tech & Gear
+              </span>
+              <h2 class="bento-hero__title">Building the Ultimate Minimalist Sony A6700 Rig</h2>
+              <p class="bento-hero__meta">AUG 10 • 10 MIN READ</p>
+            </div>
           </div>
-          <h2 class="featured-card__title">Building the Ultimate Minimalist Sony A6700 Rig</h2>
-          <p class="featured-card__excerpt">
-            An in-depth breakdown of how I configured my main camera setup for solo run-and-gun filmmaking, compact lens selections, and audio routing.
-          </p>
-          <span class="read-more-link">Read Article →</span>
+        </article>
+
+        <!-- Sidebar: Search, Search Results & Latest Posts -->
+        <aside class="bento-hero__sidebar">
+          
+          <!-- Search Bar -->
+          <div class="search-container">
+            <input 
+              type="text" 
+              id="blog-search-input" 
+              placeholder="Search posts..." 
+              aria-label="Search blog posts"
+              autocomplete="off"
+            />
+          </div>
+
+          <!-- Dynamic Search Results Dropdown/List (Hidden by default) -->
+          <div id="search-results-container" class="search-results-list" style="display: none;">
+            <div id="search-results-content"></div>
+          </div>
+
+          <h2 class="sidebar-heading">Latest Posts</h2>
+
+          <div class="sidebar-list">
+            <a href="#" class="sidebar-item clickable-post" data-content="A clean desk layout is more than just aesthetics. Reducing physical clutter directly correlates with reducing mental overhead when starting deep creative work blocks.">
+              <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=200&q=80" alt="Workspace desk setup">
+              <div class="sidebar-item__text">
+                <h3>Designing a Distraction-Free Workspace for Deep Work</h3>
+                <p>AUG 10 • 4 MIN READ</p>
+              </div>
+            </a>
+
+            <a href="#" class="sidebar-item clickable-post" data-content="Color grading in DaVinci Resolve doesn't have to be overwhelming. Here is my 4-node tree template for achieving filmic skin tones and organic warmth every time.">
+              <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=200&q=80" alt="Editing timeline">
+              <div class="sidebar-item__text">
+                <h3>My DaVinci Resolve Color Grading Process</h3>
+                <p>AUG 10 • 8 MIN READ</p>
+              </div>
+            </a>
+
+            <a href="#" class="sidebar-item clickable-post" data-content="Compact pocket cameras are revolutionizing everyday vlogging and travel video creation. We look at image stabilization and audio performance under field conditions.">
+              <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=200&q=80" alt="Osmo Pocket camera">
+              <div class="sidebar-item__text">
+                <h3>Why the Pocket Camera Revolution is Here to Stay</h3>
+                <p>AUG 10 • 5 MIN READ</p>
+              </div>
+            </a>
+          </div>
+        </aside>
+      </section>
+
+      <hr class="section-divider">
+
+      <!-- GRID SECTION -->
+      <section class="cards-section">
+        <div class="cards-section__header">
+          <h2 class="serif-section-title" style="margin-bottom: 0;">Founders Corner</h2>
         </div>
-      </a>
-    </div>
-  </section>
 
-  <!-- BLOG POSTS GRID -->
-  <section class="blog-grid-section">
-    <div class="blog-grid__inner">
-      <div class="posts-grid">
-        
-        <!-- Post Item 1 -->
-        <article class="post-card" data-category="workflow">
-          <a href="#" class="post-card__link">
-            <div class="post-card__image">
-              <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=800&q=80" alt="Workspace desk setup">
-              <span class="category-badge">WORKFLOW</span>
+        <div class="three-card-grid">
+          <article class="soft-card clickable-post" data-content="Creating a seamless workflow means eliminating friction between ideas and execution. We share insights into building reliable digital architectures for creators.">
+            <div class="soft-card__image">
+              <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80" alt="Workspace desk setup">
             </div>
-            <div class="post-card__body">
-              <div class="post-meta">
-                <span>JULY 14, 2026</span>
-                <span class="dot">•</span>
-                <span>4 MIN READ</span>
-              </div>
-              <h3 class="post-card__title">Designing a Distraction-Free Workspace for Deep Work</h3>
-              <p class="post-card__excerpt">
-                How cable management, monitor placement, and lighting transform daily productivity for creators.
-              </p>
+            <div class="soft-card__body">
+              <span class="pill-badge pill-badge--sm">
+                <span class="pill-badge__dot"></span>
+                Workflow
+              </span>
+              <h3 class="soft-card__title">Our people make the difference</h3>
+              <p class="soft-card__desc">We're an extension of your creative workflow, helping you build distraction-free environments.</p>
+              <p class="soft-card__meta">AUG 10 • 10 MIN READ</p>
             </div>
-          </a>
-        </article>
+          </article>
 
-        <!-- Post Item 2 -->
-        <article class="post-card" data-category="video">
-          <a href="#" class="post-card__link">
-            <div class="post-card__image">
-              <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80" alt="Video editing timeline">
-              <span class="category-badge">VIDEO EDITING</span>
+          <article class="soft-card clickable-post" data-content="How we achieve rich, organic color palettes without spending hours tweaking individual hue curves in post-production.">
+            <div class="soft-card__image">
+              <img src="https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=600&q=80" alt="Video editing">
             </div>
-            <div class="post-card__body">
-              <div class="post-meta">
-                <span>JUNE 30, 2026</span>
-                <span class="dot">•</span>
-                <span>8 MIN READ</span>
-              </div>
-              <h3 class="post-card__title">My DaVinci Resolve Color Grading Process</h3>
-              <p class="post-card__excerpt">
-                Step-by-step color science walkthrough for converting Sony S-Log3 into filmic, warm organic tones.
-              </p>
+            <div class="soft-card__body">
+              <span class="pill-badge pill-badge--sm">
+                <span class="pill-badge__dot"></span>
+                Video Editing
+              </span>
+              <h3 class="soft-card__title">Color Grading Like a Pro</h3>
+              <p class="soft-card__desc">Transforming raw log footage into filmic, warm organic tones with minimal effort.</p>
+              <p class="soft-card__meta">AUG 10 • 10 MIN READ</p>
             </div>
-          </a>
-        </article>
+          </article>
 
-        <!-- Post Item 3 -->
-        <article class="post-card" data-category="tech">
-          <a href="#" class="post-card__link">
-            <div class="post-card__image">
-              <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=800&q=80" alt="DJI Osmo Pocket camera">
-              <span class="category-badge">TECH &amp; GEAR</span>
+          <article class="soft-card clickable-post" data-content="A detailed look at why lightweight gimbal setups are taking over traditional shoulder rigs for solo shooters on fast-moving sets.">
+            <div class="soft-card__image">
+              <img src="https://images.unsplash.com/photo-1526170375885-4d8ecf77b99f?auto=format&fit=crop&w=600&q=80" alt="Compact camera">
             </div>
-            <div class="post-card__body">
-              <div class="post-meta">
-                <span>JUNE 12, 2026</span>
-                <span class="dot">•</span>
-                <span>5 MIN READ</span>
-              </div>
-              <h3 class="post-card__title">Why the Pocket Camera Revolution is Here to Stay</h3>
-              <p class="post-card__excerpt">
-                Why small sensor gimbals and compact creators rigs are replacing heavy mirrorless cameras on travel shoots.
-              </p>
+            <div class="soft-card__body">
+              <span class="pill-badge pill-badge--sm">
+                <span class="pill-badge__dot"></span>
+                Tech & Gear
+              </span>
+              <h3 class="soft-card__title">Minimalist Travel Rigs</h3>
+              <p class="soft-card__desc">Why compact gimbal setups and travel rigs are replacing traditional mirrorless setups.</p>
+              <p class="soft-card__meta">AUG 10 • 10 MIN READ</p>
             </div>
-          </a>
-        </article>
+          </article>
+        </div>
+      </section>
 
+      <!-- PAGINATION -->
+      <div class="app-pagination">
+        <button class="page-arrow" id="page-prev">←</button>
+        <div class="page-numbers" id="page-numbers">
+          <span class="page-num active" data-page="1">1</span>
+          <span class="page-num" data-page="2">2</span>
+          <span class="page-num" data-page="3">3</span>
+        </div>
+        <button class="page-arrow" id="page-next">→</button>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ARTICLE MODAL READER -->
+  <div class="article-modal" id="article-modal" aria-hidden="true">
+    <div class="article-modal__backdrop" id="article-modal-backdrop"></div>
+    <div class="article-modal__sheet">
+      <button class="article-modal__close" id="article-modal-close" aria-label="Close article">✕</button>
+      <div class="article-modal__content">
+        <span class="pill-badge pill-badge--sm" id="modal-badge">
+          <span class="pill-badge__dot"></span>
+          <span id="modal-badge-text">Category</span>
+        </span>
+        <h1 class="article-modal__title" id="modal-title">Article Title</h1>
+        <p class="article-modal__meta" id="modal-meta">AUG 10 • 5 MIN READ</p>
+        <div class="article-modal__hero-image">
+          <img id="modal-img" src="" alt="Article cover image">
+        </div>
+        <div class="article-modal__body" id="modal-body"></div>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- UNIVERSAL FOOTER -->
   <footer class="site-footer">
-    <div class="footer__wave-banner"></div>
-
     <div class="footer__content">
       <div class="footer__grid">
-        
-        <!-- Left: Branding & Newsletter -->
         <div class="footer__brand-col">
           <div class="footer__logo">OLLI KM<span class="logo-sup">®</span></div>
           <p class="footer__newsletter-label">SUBSCRIBE FOR OUR NEWSLETTER</p>
@@ -162,7 +209,6 @@
           <p class="footer__disclaimer">Your information is never disclosed to third parties.</p>
         </div>
 
-        <!-- Right: 3-Column Navigation -->
         <nav class="footer__nav-grid">
           <div class="footer__col">
             <span class="footer__col-head">MAIN PAGES</span>
@@ -172,17 +218,11 @@
           <div class="footer__col">
             <span class="footer__col-head">COMPANY</span>
             <a href="blog.html">Blog</a>
-            <a href="contact.html">Tech</a>
-          </div>
-          <div class="footer__col">
-            <span class="footer__col-head">CONTACT &amp; OTHER</span>
             <a href="contact.html">Contact</a>
           </div>
         </nav>
-
       </div>
 
-      <!-- Edge-to-Edge Watermark -->
       <div class="footer__watermark-bottom">OLLI KM</div>
     </div>
   </footer>

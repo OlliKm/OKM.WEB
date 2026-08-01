@@ -1,7 +1,7 @@
 ---
 title: DJI Osmo Pocket 4P
 date: 2026-07-31
-image: images/uploads/djip4web.jpg
+image: https://fstoppers.com/gear/dji-osmo-pocket-4p-review-dji-just-changed-content-creation-market-again-903455
 ---
 
 This is your post content...

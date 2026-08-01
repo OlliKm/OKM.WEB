@@ -120,7 +120,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="mini-browser__title-bar">${post.title}</span>
           </div>
           <div class="soft-card__image">
-            <img src="${post.img}" alt="${post.title}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop';">
+            <!-- Removed the Unsplash onerror placeholder. It will now load your exact image path -->
+            ${post.img ? `<img src="${post.img}" alt="${post.title}">` : `<div style="padding: 2rem; text-align: center; background: #eee;">No Image</div>`}
           </div>
         </div>
         <div class="soft-card__body">
@@ -155,11 +156,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const repo = 'OlliKm/OKM.WEB'; 
     const branch = 'main';
 
-    // All 3 markdown files present in content/blog/
     const postFiles = [
       'djio-smo-pocket-4p.md',
       'macbook-m2-pro-worth-it.md',
-      'test-post-see-if-it-works.md' // Update if your 3rd filename differs slightly
+      'test-post-see-if-it-works.md' 
     ];
 
     try {
@@ -174,14 +174,13 @@ document.addEventListener('DOMContentLoaded', () => {
         let category = "Insights";
         let dateStr = "2026-08-15";
         let fileContent = "";
-        let extractedImg = 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=600&auto=format&fit=crop';
+        let extractedImg = ""; // Removed hardcoded Unsplash placeholder
         
         try {
           const mdResponse = await fetch(downloadUrl);
           if (mdResponse.ok) {
             const rawText = await mdResponse.text();
 
-            // Safely parse frontmatter and body content
             const parts = rawText.split('---');
             if (parts.length >= 3) {
               const frontmatter = parts[1];
@@ -200,11 +199,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 let foundPath = imgMatch[2].trim();
                 if (foundPath && foundPath !== 'N-A' && foundPath !== 'N/A') {
                   foundPath = foundPath.replace(/^\[\[/, '').replace(/\]\]$/, '');
+                  
+                  // Corrected routing logic to find your local GitHub images
                   if (foundPath.startsWith('http')) {
                     extractedImg = foundPath;
+                  } else if (foundPath.startsWith('/')) {
+                    // Points to the root of your repo
+                    extractedImg = `https://raw.githubusercontent.com/${repo}/${branch}${foundPath}`;
                   } else {
-                    const cleanPath = foundPath.replace(/^\.?\//, '');
-                    extractedImg = `https://raw.githubusercontent.com/${repo}/${branch}/${cleanPath}`;
+                    // Relative path - assumes the image is in the same folder as your blog markdown files
+                    const cleanPath = foundPath.replace(/^\.\//, '');
+                    extractedImg = `https://raw.githubusercontent.com/${repo}/${branch}/content/blog/${cleanPath}`;
                   }
                 }
               }
@@ -270,7 +275,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.getElementById('modal-title').textContent = title;
         document.getElementById('modal-meta').textContent = meta;
-        document.getElementById('modal-img').src = imgSrc;
+        
+        const modalImg = document.getElementById('modal-img');
+        if(imgSrc) {
+            modalImg.src = imgSrc;
+            modalImg.style.display = 'block';
+        } else {
+            modalImg.style.display = 'none';
+        }
         
         const formattedContent = content.replace(/\n/g, '<br>');
         document.getElementById('modal-body').innerHTML = `<p>${formattedContent}</p>`;

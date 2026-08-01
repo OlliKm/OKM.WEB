@@ -2555,3 +2555,32 @@ body.about-style-body {
   font-weight: 600;
   color: #8C3B2B;
 }
+/* 1. Hide the mobile pagination by default (for desktop view) */
+.app-pagination {
+  display: none; 
+}
+
+/* 2. Rules for Mobile Screens (Tablets and Phones - under 768px) */
+@media screen and (max-width: 767px) {
+  
+  /* Show the mobile pagination buttons */
+  .app-pagination {
+    display: flex; /* Or display: block; depending on your current styling */
+    justify-content: space-between;
+  }
+
+  /* Hide your desktop clickable titles */
+  /* NOTE: Replace '.desktop-titles' with the actual class or ID of your desktop titles */
+  .desktop-titles {
+    display: none; 
+  }
+}
+
+/* 3. Rules for Desktop Screens (768px and wider) */
+@media screen and (min-width: 768px) {
+  
+  /* Ensure desktop titles are visible on larger screens */
+  .desktop-titles {
+    display: flex; /* Or display: block; */
+  }
+}
